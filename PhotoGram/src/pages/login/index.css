@@ -1,0 +1,71 @@
+
+
+.circulargraidents{
+    background-color: #ffffff;
+    -webkit-mask: radial-gradient(circle at 20% 50%, black 0%, transparent 25%);
+}
+
+.image-ele-fist{
+    animation-name: movedown;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+.image-ele-sec{
+    animation-name: moveleft;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+.image-ele-third{
+    animation-name: moveright;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+.image-ele-fourth{
+    animation-name: moveup;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+@keyframes movedown{
+    0%,40%{
+        opacity: 0;
+        transform: translate3d(0,-30px,0);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes moveup{
+    0%,40%{
+        opacity: 0;
+        transform: translate3d(0,30px,0);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes moveleft{
+    0%,40%{
+        opacity: 0;
+        transform: translate3d(30px,0,0);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
+@keyframes moveright{
+    0%,40%{
+        opacity: 0;
+        transform: translate3d(-30px,0,0);
+    }
+    100%{
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+}
