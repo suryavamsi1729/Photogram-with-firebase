@@ -1,8 +1,14 @@
 
-
 .circulargraidents{
-    background-color: #ffffff;
-    -webkit-mask: radial-gradient(circle at 20% 50%, black 0%, transparent 25%);
+    background-image: radial-gradient(circle at 50% 50%, rgb(255, 255, 255) 0%, transparent 70%);
+    filter: brightness(1.25);
+    filter: blur(100px);
+    transform-origin: 50%;
+    animation-name: rotation;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* -webkit-mask: radial-gradient(circle at 50% 50%, black 0%, transparent 70%); */
 }
 
 .image-ele-fist{
@@ -68,4 +74,13 @@
         opacity: 1;
         transform: translate3d(0,0,0);
     }
+}
+
+@keyframes rotation{
+    0% {
+        transform: rotate(0deg) translateX(400px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(400px) rotate(360deg);
+      }
 }

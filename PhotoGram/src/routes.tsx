@@ -6,6 +6,7 @@ import Home from "./pages/home";
 import Post from "./pages/post";
 import Photos from "./pages/photos";
 import Profile from "./pages/profile";
+import PasswordReset from "./pages/login/passwordReset";
 import { PrivateRoute } from "./components/privateRoutes";
 
 
@@ -18,6 +19,11 @@ export const router = createBrowserRouter([
     {
         path:"/signup",
         element:<Signup/>,
+        errorElement:<Error/>
+    },
+    {
+        path:"/passwordreset",
+        element:<PasswordReset/>,
         errorElement:<Error/>
     },
     {
