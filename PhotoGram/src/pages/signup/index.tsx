@@ -7,9 +7,12 @@ import { Link,useNavigate } from "react-router-dom";
 import { UserSignIn } from "@/types";
 import { useUseAuth } from "@/context/userAuthContex";
 import { Icons } from "@/components/ui/icons";
+import Spinner from "@/components/ui/sipinner";
 import { auth } from "@/firebaseConfig";
 import { validatePassword ,sendEmailVerification} from "firebase/auth";
 import AuthLayout from "@/components/ui/authLayout";
+import { useToast } from "@/hooks/use-toast";
+
 interface ISignUpProps {
 }
 const initalValue : UserSignIn = {
@@ -19,8 +22,9 @@ const initalValue : UserSignIn = {
     confimePassword:"",
 }
 const Signup:React.FunctionComponent <ISignUpProps> = () => {
+    const {toast} = useToast();
     const navigate = useNavigate();
-    const {signUp,googleSignIn,setLoading} = useUseAuth();
+    const {signUp,googleSignIn,setLoading,loading} = useUseAuth();
     const [userInfo,setUserInfo] = useState<UserSignIn>(initalValue);
     const handelSubmit = async (e:React.MouseEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -30,7 +34,10 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
             if(status.isValid){
                 console.log("surya");
                 var user = await signUp(userInfo.email,userInfo.confimePassword);
-                await sendEmailVerification(user.user);
+                await sendEmailVerification(user.user,{
+                    url: "http://localhost:3000/email-verification",
+                    handleCodeInApp:true,
+                });
                 alert(`verifcation email is send to ${user.user.email}`);
                 navigate("/login");
             }
@@ -55,8 +62,44 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                 setUserInfo({...userInfo,errorPassword:`${errorMessage} chars`});
             }
         }
-        catch(error){
-            console.log("error is :",error);
+        catch(error:any){
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "The email address is already in use by another account.",
+                      });
+                    break;
+                case "auth/invalid-email":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Please enter a valid email address.",
+                    });
+                    break;
+                case "auth/operation-not-allowed":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Email/password accounts are not enabled. Contact support.",
+                    });
+                    break;
+                case "auth/weak-password":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Your password is too weak. Please use at least 6 characters.",
+                    });
+                    break;
+                default:
+                    toast({
+                        variant: "destructive",
+                        title: "Unkown Error",
+                        description: "An unknown error occurred. Please try again.",
+                    });
+                    break;
+            }
         }
         
         setLoading(false);
@@ -142,7 +185,24 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                 </div>
                             </CardContent>
                             <CardFooter className="flex flex-col">
-                                <Button className="w-full bg-slate-50 hover:bg-slate-50/90 border-0 text-zinc-950" type="submit">Create account</Button>
+                                <div className="relative w-full">
+                                    <Button className="w-full bg-slate-50 hover:bg-slate-50/90 border-0 text-zinc-950" type="submit">
+                                    {
+                                        loading?null:"Create Account"
+                                    }
+                                    </Button>
+                                    {
+                                        loading
+                                        ?<div className="absolute inset-0 flex justify-center items-center gap-2 ">
+                                            <div className="w-8 h-8">
+                                                <Spinner/>
+                                            </div>
+                                            <p className="text-base text-indigo-600 font-medium">Loading...</p>
+                                        </div>
+                                        :null
+                                    }
+
+                                </div>
                                 <p className="mt-3 text-sm  text-center text-slate-100/90">
                                     Alredy have an Account ? <Link to="/login">login</Link>
                                 </p>

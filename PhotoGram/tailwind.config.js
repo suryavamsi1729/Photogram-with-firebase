@@ -1,3 +1,5 @@
+const { transform } = require('typescript');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ["class"],
@@ -50,7 +52,17 @@ module.exports = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+		keyframes:{
+			scaleinout :{
+				'0%,100%':{transform:'scale(1)'},
+				'50%':{transform:'scale(1.25)'},
+			}
+		},
+		animation:{
+			scaleinout: 'scaleinout 1.5s ease-in-out infinite',
+		},
+
   	}
   },
   plugins: [require("tailwindcss-animate")],

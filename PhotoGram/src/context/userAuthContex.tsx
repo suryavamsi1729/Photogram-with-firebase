@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { auth } from "@/firebaseConfig";
-import { createUserWithEmailAndPassword,sendPasswordResetEmail, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User,} from "firebase/auth";
+import { createUserWithEmailAndPassword,sendPasswordResetEmail, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User, confirmPasswordReset, applyActionCode,} from "firebase/auth";
 import { createContext} from "react";
 
 interface IUserAuthProvider {
@@ -16,6 +16,8 @@ type AuthContextData = {
     loading: boolean,
     setLoading : (loading:boolean)=>void,
     linkToResetPassword: typeof linkToResetPassword,
+    resetPassword : typeof resetPassword,
+    verifyEmail : typeof verifyEmail,
 }
 
 
@@ -36,9 +38,14 @@ const googleSignIn = () =>{
     return signInWithPopup(auth,googleAuthProvider);
 }
  const linkToResetPassword = (email:string)=>{
-    return sendPasswordResetEmail(auth,email);
+    return sendPasswordResetEmail(auth,email,{url:"http://localhost:3000/reset-password",handleCodeInApp:true});
  }
-
+const resetPassword = (oobcode:string,newpwd:string)=>{
+    return confirmPasswordReset(auth,oobcode,newpwd);
+}
+const verifyEmail = (oobcode:string)=>{
+    return applyActionCode(auth,oobcode);
+}
 export const userAuthContext = createContext<AuthContextData>({
     user:  null,
     logIn,
@@ -48,6 +55,8 @@ export const userAuthContext = createContext<AuthContextData>({
     loading: false,
     setLoading : ()=>{},
     linkToResetPassword,
+    resetPassword,
+    verifyEmail,
 });
 
 export const UserAuthProvider : React.FC<IUserAuthProvider> = ({children})=>{
@@ -78,6 +87,8 @@ export const UserAuthProvider : React.FC<IUserAuthProvider> = ({children})=>{
         loading,
         setLoading,
         linkToResetPassword,
+        resetPassword,
+        verifyEmail,
     }
     return (
         <userAuthContext.Provider value={value}>

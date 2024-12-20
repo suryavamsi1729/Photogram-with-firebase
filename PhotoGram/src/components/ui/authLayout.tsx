@@ -1,16 +1,12 @@
 import React from "react";
-import Loader from "@/components/ui/loader";
-import { useUseAuth } from "@/context/userAuthContex";
+import { Toaster } from "./toaster";
 interface IAuthLayoutProps {
-    children:React.ReactElement,
+    children:React.ReactNode|null,
 }
 const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
-    const {loading} = useUseAuth();
     return (
-        <div className="relative w-screen h-screen flex flex-row justify-center items-center bg-zinc-950">
-            {
-                loading?<Loader/>:null
-            }
+        <div className="relative overflow-hidden w-screen h-screen flex flex-row justify-center items-center bg-zinc-950">
+            <Toaster/>
             <div className="hidden md:block w-1/2 h-5/6 z-40">
                 <div className="relative group w-full h-full grid grid-cols-2 hover:gap-16 gap-5 transition-all duration-700 delay-75">
                     <div className="image-ele-fist w-2/3 aspect-video  place-self-end rounded-xl z-50 bg-[url('assets/image-3.jpeg')] bg-cover bg-center"></div>
@@ -22,7 +18,7 @@ const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
                     </div>
                 </div>
             </div>
-            <div className="relative w-full md:w-1/2 h-full flex flex-col justify-center items-center z-40">
+            <div className="relative w-full md:w-1/2 h-full  flex flex-col justify-center items-center z-40">
                 <div className="circulargraidents absolute w-64 h-64 bottom-3 left-16 rounded-full z-10"></div>
                 <div className="circulargraidents absolute w-48 h-48 top-24 right-16 rounded-full z-10"></div>
                 <div className="circulargraidents absolute w-52 h-52 top-24 -left-[90%] rounded-full z-10"></div>
@@ -32,6 +28,7 @@ const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
                 </div>
             </div>
         </div>
+
     );
 }
 

@@ -11,7 +11,13 @@ export interface UserLogIn{
     password:string,
 }
 
-export default interface PasswordResetEmail{
+export interface ForgotPassword{
     email: string,
     setError: string,
+}
+
+export interface IResetPassword {
+    newpassword: string,
+    cnfpassword: string,
+    error: string,
 }

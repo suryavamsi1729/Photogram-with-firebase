@@ -7,11 +7,13 @@ import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { UserLogIn } from "@/types";
 import { useUseAuth } from "@/context/userAuthContex";
+import { useToast } from "@/hooks/use-toast";
 import { Icons } from "@/components/ui/icons";
 import AuthLayout from "@/components/ui/authLayout";
 
 //importing css files
 import "./index.css";
+import Spinner from "@/components/ui/sipinner";
 
 
 //interface to define the props types
@@ -26,8 +28,9 @@ const initalValue : UserLogIn = {
 }
 
 const Login:React.FunctionComponent <ILogInProps> = () => {
+    const {toast} = useToast();
     const navigate = useNavigate();
-    const {logIn,googleSignIn,logOut,setLoading} = useUseAuth();
+    const {logIn,googleSignIn,logOut,setLoading,loading} = useUseAuth();
     const [userInfo,setUserInfo] = useState<UserLogIn>(initalValue);
     const handelSubmit = async (e:React.MouseEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -35,7 +38,6 @@ const Login:React.FunctionComponent <ILogInProps> = () => {
         try{
             const user = await logIn(userInfo.email,userInfo.password);
             if(user.user.emailVerified){
-                alert("login is sucessfull");
                 navigate("/");
             }
             else{
@@ -56,8 +58,58 @@ const Login:React.FunctionComponent <ILogInProps> = () => {
             await googleSignIn();
             navigate("/");
         }
-        catch(error){
-            console.log("Error is type is",error);
+        catch(error:any){
+            switch (error.code) {
+                case "auth/invalid-email":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Please enter a valid email address.",
+                    });
+                    break;
+                case "auth/user-disabled":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "This account has been disabled. Please contact support."
+                    });
+                    break;
+                case "auth/user-not-found":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "No account found with this email. Please register."
+                    });
+                    break;
+                case "auth/wrong-password":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Incorrect password. Please try again or reset your password."
+                    });
+                    break;
+                case "auth/too-many-requests":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Too many attempts. Please try again later or reset your password."
+                    });
+                    break;
+                case "auth/operation-not-allowed":
+                    toast({
+                        variant: "destructive",
+                        title: error.code,
+                        description: "Sign-in is currently disabled. Please contact support."
+                    });
+                    break;
+                default:
+                    toast({
+                        variant: "destructive",
+                        title: "Unkown Error",
+                        description: "An unknown error occurred. Please try again.",
+                    });
+                    break;
+            }
         }
         setLoading(false);
     }
@@ -119,11 +171,22 @@ const Login:React.FunctionComponent <ILogInProps> = () => {
                                 />
                                 </div>
                                 <div className="grid">
-                                    <span onClick={()=>{navigate("/passwordreset")}} className="justify-self-end hover:cursor-pointer hover:text-indigo-600 text-xs text-indigo-500 font-semibold">Forgot Password?</span>
+                                    <span onClick={()=>{navigate("/forgot-password")}} className="justify-self-end hover:cursor-pointer hover:text-indigo-600 text-xs text-indigo-500 font-semibold">Forgot Password?</span>
                                 </div>
                             </CardContent>
                             <CardFooter className="flex flex-col">
-                                <Button className="w-full bg-slate-50 hover:bg-slate-50/90 border-0 text-zinc-950" type="submit">Login</Button>
+                                <button className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
+                                {
+                                    loading?
+                                    <>
+                                        <div className="w-8 h-8">
+                                            <Spinner/>
+                                        </div>
+                                        <p className="text-base font-medium text-indigo-600">Loading...</p>
+                                    </>
+                                    :"Login"
+                                }
+                                </button>
                                 <p className="mt-3 text-sm  text-center text-slate-100/90">
                                     Don't have an Account ? <Link to="/signup">signup</Link>
                                 </p>
