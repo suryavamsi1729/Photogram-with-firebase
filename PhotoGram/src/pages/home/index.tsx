@@ -1,4 +1,5 @@
 // import React from "react";
+import { useUseAuth } from "@/context/userAuthContex";
 
 function Home (){
     return (

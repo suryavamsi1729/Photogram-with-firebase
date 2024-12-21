@@ -14,6 +14,7 @@ export interface UserLogIn{
 export interface ForgotPassword{
     email: string,
     setError: string,
+    sucessmsg: string,
 }
 
 export interface IResetPassword {

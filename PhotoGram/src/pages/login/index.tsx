@@ -32,25 +32,77 @@ const Login:React.FunctionComponent <ILogInProps> = () => {
     const navigate = useNavigate();
     const {logIn,googleSignIn,logOut,setLoading,loading} = useUseAuth();
     const [userInfo,setUserInfo] = useState<UserLogIn>(initalValue);
-    const handelSubmit = async (e:React.MouseEvent<HTMLFormElement>)=>{
+    const handelSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        try{
-            const user = await logIn(userInfo.email,userInfo.password);
-            if(user.user.emailVerified){
-                navigate("/");
-            }
-            else{
-                alert("verify email befor login");
-                await logOut();
-            }
-            
+        try {
+          const user = await logIn(userInfo.email, userInfo.password);
+      
+          if (user.user.emailVerified) {
+            navigate("/");
+          } else {
+            alert("Please verify your email before logging in.");
+            await logOut();
+          }
+        } catch (error: any) {
+          // Handle specific Firebase errors
+          switch (error.code) {
+            case "auth/invalid-email":
+              toast({
+                variant: "destructive",
+                title: "Invalid email.",
+                description: "The email address is invalid. Please check and try again.",
+              });
+              break;
+      
+            case "auth/user-disabled":
+              toast({
+                variant: "destructive",
+                title: "Account disabled.",
+                description: "Your account has been disabled. Please contact support.",
+              });
+              break;
+      
+            case "auth/user-not-found":
+            case "auth/wrong-password":
+              toast({
+                variant: "destructive",
+                title: "Invalid credentials.",
+                description: "The email or password you entered is incorrect. Please try again.",
+              });
+              break;
+      
+            case "auth/too-many-requests":
+              toast({
+                variant: "destructive",
+                title: "Too many attempts.",
+                description: "You have made too many attempts. Please wait and try again later.",
+              });
+              break;
+      
+            case "auth/network-request-failed":
+              toast({
+                variant: "destructive",
+                title: "Network error.",
+                description: "A network error occurred. Please check your connection.",
+              });
+              break;
+      
+            default:
+              toast({
+                variant: "destructive",
+                title: "Login failed.",
+                description: "An unexpected error occurred. Please try again later.",
+              });
+          }
+      
+          // Log the error for debugging
+          console.log("Error is:", error);
         }
-        catch(error){
-            console.log("error is :",error);
-        }
+      
         setLoading(false);
-    }
+      };
+      
     const handelGopgleSignin = async (e:React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setLoading(true);

@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { auth } from "@/firebaseConfig";
 import { createUserWithEmailAndPassword,sendPasswordResetEmail, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User, confirmPasswordReset, applyActionCode,} from "firebase/auth";
 import { createContext} from "react";
+import useAuthStateChange from "@/hooks/useauthstatechange";
 
 interface IUserAuthProvider {
     children : React.ReactNode,
@@ -60,24 +61,9 @@ export const userAuthContext = createContext<AuthContextData>({
 });
 
 export const UserAuthProvider : React.FC<IUserAuthProvider> = ({children})=>{
-    const [user,setUser] = useState<User | null>(null);
+    // const [user,setUser] = useState<User | null>(null);
+    const {user} = useAuthStateChange();
     const [loading,setLoading] = useState <boolean> (false);
-    // console.log(user);
-    useEffect(()=>{
-        // onAuthStateChanged is return a fuction is used for cleanup
-        const unSubcribe = onAuthStateChanged(auth,(user)=>{
-            if(user){
-                setUser(user);
-            }
-            else{
-                setUser(null);
-            }
-            
-        });
-        return ()=>{
-            unSubcribe();
-        }
-    },[]);
     const value:AuthContextData = {
         user,
         logIn,

@@ -6,7 +6,7 @@ import { Label } from "@radix-ui/react-label";
 import { useUseAuth } from "@/context/userAuthContex";
 import { ForgotPassword } from "@/types";
 import { useState } from "react";
-
+import { useToast } from "@/hooks/use-toast";
 interface IPasswordReset{
 
 }
@@ -14,17 +14,24 @@ interface IPasswordReset{
 const PasswordResetEmailval : ForgotPassword ={
     email: "",
     setError: "",
+    sucessmsg: "",
 } 
 
 const forgotPassword : React.FC<IPasswordReset> = ()=>{
+  const {toast} = useToast();
     const {linkToResetPassword,loading,setLoading} = useUseAuth();
     const [emailDetails,setEmailDetails] = useState<ForgotPassword>(PasswordResetEmailval);
     const sendEmail = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
+        console.log(emailDetails.email);
         try {
           await linkToResetPassword(emailDetails.email);
-          alert("Email sent successfully!");
+          toast({
+            className:"bg-green-500 text-slate-50 border-none",
+            title: "Link Send Successfully.",
+            description: "if the user exist with email, then Password Reset link is send to the email.",
+          });
         } catch (error: any) {
           switch (error.code) {
             case "auth/invalid-email":
