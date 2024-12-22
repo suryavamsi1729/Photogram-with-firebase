@@ -1,0 +1,19 @@
+.navitem::after{
+    position: absolute;
+    inset: 0px;
+    content: attr(data-content);
+    transform: translateY(24px);
+    opacity: 0.4;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #f8fafc;
+}
+.navitem:hover::after{
+    transform: translateY(0px);
+    opacity: 1;
+    transition:  transform ease-in-out 300ms;
+}
+
+
+/* after:block after:absolute after:inset-0 after:text-base after:font-normal after:align-middle after:text-slate-50 after:translate-y-6 after:opacity-40 hover:after:translate-y-0 hover:after:opacity-100 hover:after:transition hover:after:duration-500 hover:after:ease-in-out */

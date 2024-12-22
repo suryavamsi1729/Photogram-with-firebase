@@ -1,9 +1,11 @@
 // import React from "react";
-import { useUseAuth } from "@/context/userAuthContex";
+import Layout from "@/components/ui/layout";
 
 function Home (){
     return (
-        <div>Home</div>
+        <Layout >
+            <div>home</div>
+        </Layout>
     );
 }
 

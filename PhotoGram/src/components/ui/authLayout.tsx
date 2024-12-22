@@ -9,10 +9,10 @@ const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
             <Toaster/>
             <div className="hidden md:block w-1/2 h-5/6 z-40">
                 <div className="relative group w-full h-full grid grid-cols-2 hover:gap-16 gap-5 transition-all duration-700 delay-75">
-                    <div className="image-ele-fist w-2/3 aspect-video  place-self-end rounded-xl z-50 bg-[url('assets/image-3.jpeg')] bg-cover bg-center"></div>
-                    <div className="image-ele-sec w-[40%] aspect-[9/14] bg-gray-300  self-end rounded-xl z-50 bg-[url('assets/image-1.jpeg')] bg-cover bg-center"></div>
-                    <div className="image-ele-third w-[40%] aspect-[9/14] bg-gray-300 justify-self-end rounded-xl z-50 bg-[url('assets/image-2.jpeg')] bg-cover bg-center"></div>
-                    <div className="image-ele-fourth w-2/3 aspect-video bg-gray-300 rounded-xl z-50 bg-[url('assets/image-4.jpeg')] bg-cover bg-center"></div>
+                    <div className="image-ele-fist w-2/3 aspect-video  place-self-end rounded-xl z-50 bg-[url('assets/images/image-3.jpeg')] bg-cover bg-center"></div>
+                    <div className="image-ele-sec w-[40%] aspect-[9/14] bg-gray-300  self-end rounded-xl z-50 bg-[url('assets/images/image-1.jpeg')] bg-cover bg-center"></div>
+                    <div className="image-ele-third w-[40%] aspect-[9/14] bg-gray-300 justify-self-end rounded-xl z-50 bg-[url('assets/images/image-2.jpeg')] bg-cover bg-center"></div>
+                    <div className="image-ele-fourth w-2/3 aspect-video bg-gray-300 rounded-xl z-50 bg-[url('assets/images/image-4.jpeg')] bg-cover bg-center"></div>
                     <div className="absolute inset-0 z-40 flex justify-center items-center">
                         <p className="bg-clip-text opacity-0 group-hover:opacity-100 bg-gradient-to-r  from-purple-500 to-pink-500 text-center text-3xl text-transparent font-bold transition-all duration-700 delay-100">PhotoGram</p>
                     </div>

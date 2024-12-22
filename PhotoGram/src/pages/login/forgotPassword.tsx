@@ -71,7 +71,7 @@ const forgotPassword : React.FC<IPasswordReset> = ()=>{
       
     return(
         <>
-            <AuthLayout>
+            <AuthLayout >
                 <Card className="border-zinc-500/30 bg-transparent py-2">
                     <form onSubmit={sendEmail}>
                         <CardHeader className="space-y-1">

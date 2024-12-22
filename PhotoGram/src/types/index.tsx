@@ -22,3 +22,7 @@ export interface IResetPassword {
     cnfpassword: string,
     error: string,
 }
+export interface IBasicFCProps{
+    children?:React.ReactNode,
+    className?: string,
+}
