@@ -57,10 +57,22 @@ module.exports = {
 			scaleinout :{
 				'0%,100%':{transform:'scale(1)'},
 				'50%':{transform:'scale(1.25)'},
+			},
+			dropdownAnimation:{
+				'0%,20%':{
+					transform:'translatex(-16px)',
+					opacity: '0',
+				},
+				'100%':{
+					transform:'translatex(0px)',
+					opacity: '1',
+				}
 			}
 		},
 		animation:{
 			scaleinout: 'scaleinout 1.5s ease-in-out infinite',
+			dropdownAnimation: 'dropdownAnimation 0.4s ease-in-out',
+			dropdownRemoveAnimation : 'dropdownAnimation 0.5s ease-in-out reverse',
 		},
 
   	}

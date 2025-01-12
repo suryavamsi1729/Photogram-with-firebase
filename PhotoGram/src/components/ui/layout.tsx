@@ -53,10 +53,7 @@ const Layout:React.FC<ILayout> = ({className,children})=>{
                                 })
                             }
                         </NavBarItemsConatiner>
-                        <UserComp className="justify-end gap-3">
-                            <div className="w-7 h-7 bg-slate-50 rounded-full"></div>
-                            <p className="text-base font-normal text-pink-500">Surya</p>
-                        </UserComp>
+                        <UserComp className="justify-end gap-3"/>
                     </NavBar>
                     <div className="w-full h-auto grow">
                         {children}

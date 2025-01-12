@@ -1,8 +1,12 @@
 // import React from "react";
 
+import Layout from "@/components/ui/layout";
+
 function Post (){
     return (
-        <div>Post</div>
+        <Layout >
+            <div>home</div>
+        </Layout>
     );
 }
 
