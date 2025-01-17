@@ -6,6 +6,12 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+		transformOrigin: {			
+			'top-center': 'top center',	
+		},
+		rotate: {
+			'60': '60deg',
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
