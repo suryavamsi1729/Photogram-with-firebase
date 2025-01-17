@@ -1,0 +1,130 @@
+
+/* shetter plates container */
+.plates-container{
+    animation: plates-container-animation 3s linear infinite;
+}
+
+/* shetter plates */
+.shetter-plates:nth-child(1){
+    animation: plate-animation-1 3s linear infinite;
+}
+
+.shetter-plates:nth-child(2){
+    animation: plate-animation-2 3s linear infinite;
+}
+
+.shetter-plates:nth-child(3){
+    animation: plate-animation-3 3s linear infinite;
+}
+
+.shetter-plates:nth-child(4){
+    animation: plate-animation-4 3s linear infinite;
+}
+
+.shetter-plates:nth-child(5){
+    animation: plate-animation-5 3s linear infinite;
+}
+
+.shetter-plates:nth-child(6){
+    animation: plate-animation-6 3s linear infinite;
+}
+
+
+/* animation keyfram for .plates-container */
+@keyframes plates-container-animation {
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(90deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    75%{
+        transform: rotate(-90deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
+}
+
+
+
+/* animation keyframes of each plate */
+/* rotate 0deg */
+@keyframes plate-animation-1 {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+    
+}
+ /* rotate 60deg */
+@keyframes plate-animation-2 {
+    0%{
+        transform: rotate(60deg);
+    }
+    50% {
+        transform: translateX(-25px) translateY(-43.30125px) rotate(60deg);
+    }
+    100% {
+        transform: rotate(60deg);
+    }
+}
+ /* rotate 120deg */
+ @keyframes plate-animation-3 {
+    0%{
+        transform: rotate(120deg);
+    }
+    50% {
+        transform: translateX(25px) translateY(-43.30125px) rotate(120deg);
+    }
+    100% {
+        transform: rotate(120deg);
+    }
+}
+
+/* rotate 180deg */
+@keyframes plate-animation-4 {
+    0%{
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: translateX(50px) rotate(180deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+/* rotate 240deg */
+@keyframes plate-animation-5 {
+    0%{
+        transform: rotate(240deg);
+    }
+    50% {
+        transform: translateX(25px) translateY(43.30125px) rotate(240deg);
+    }
+    100% {
+        transform: rotate(240deg);
+    }
+}
+
+/* rotate 300deg */
+@keyframes plate-animation-6 {
+    0%{
+        transform: rotate(300deg);
+    }
+    50% {
+        transform: translateX(-25px) translateY(43.30125px) rotate(300deg);
+    }
+    100% {
+        transform: rotate(300deg);
+    }
+}

@@ -8,9 +8,18 @@ module.exports = {
   	extend: {
 		transformOrigin: {			
 			'top-center': 'top center',	
+			'bottom-center': 'bottom center',
 		},
 		rotate: {
+			'0': '0deg',
+			'30': '30deg',
 			'60': '60deg',
+			'120': '120deg',
+			'150': '150deg',
+			'210': '210deg',
+			'240': '240deg',
+			'300': '300deg',
+			'330': '330deg',
 		},
   		borderRadius: {
   			lg: 'var(--radius)',
