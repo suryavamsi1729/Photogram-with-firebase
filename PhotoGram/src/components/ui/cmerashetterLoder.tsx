@@ -31,7 +31,9 @@ const CmerashetterLoader:React.FC<ICmerashetterLoader> = ()=>{
                             </svg>
                         </div>
                         {/* <div className="w-4 h-4 z-50 bg-red-800"></div> */}
+                        <div className="absolute z-[100] w-full h-full bg-stone-100/20 backdrop-blur-[1px] rounded-full "></div>
                     </div>
+                    
                 </div>
             </div>
         </>

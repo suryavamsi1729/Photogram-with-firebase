@@ -1,32 +1,33 @@
 
 /* shetter plates container */
 .plates-container{
-    animation: plates-container-animation 3s linear infinite;
+    animation: plates-container-animation 10s ease-in-out infinite;
+    /* background-image: radial-gradient(rgb(37,99,235) 5%,rgb(192,38,211) 30%); */
 }
 
 /* shetter plates */
 .shetter-plates:nth-child(1){
-    animation: plate-animation-1 3s linear infinite;
+    animation: plate-animation-1 5s ease-in-out infinite;
 }
 
 .shetter-plates:nth-child(2){
-    animation: plate-animation-2 3s linear infinite;
+    animation: plate-animation-2 5s ease-in-out infinite;
 }
 
 .shetter-plates:nth-child(3){
-    animation: plate-animation-3 3s linear infinite;
+    animation: plate-animation-3 5s ease-in-out infinite;
 }
 
 .shetter-plates:nth-child(4){
-    animation: plate-animation-4 3s linear infinite;
+    animation: plate-animation-4 5s ease-in-out infinite;
 }
 
 .shetter-plates:nth-child(5){
-    animation: plate-animation-5 3s linear infinite;
+    animation: plate-animation-5 5s ease-in-out infinite;
 }
 
 .shetter-plates:nth-child(6){
-    animation: plate-animation-6 3s linear infinite;
+    animation: plate-animation-6 5s ease-in-out infinite;
 }
 
 
@@ -36,16 +37,16 @@
         transform: rotate(0deg);
     }
     25%{
-        transform: rotate(90deg);
+        transform: rotate(180deg);
     }
     50%{
-        transform: rotate(0deg);
+        transform: rotate(360deg);
     }
     75%{
-        transform: rotate(-90deg);
+        transform: rotate(-180deg);
     }
     100%{
-        transform: rotate(0deg);
+        transform: rotate(-360deg);
     }
 }
 
@@ -54,77 +55,78 @@
 /* animation keyframes of each plate */
 /* rotate 0deg */
 @keyframes plate-animation-1 {
-    0% {
+    0%,10% {
         transform: translateX(0);
     }
-    50% {
+    40%,60% {
         transform: translateX(-50px);
     }
-    100% {
+    90%,100% {
         transform: translateY(0);
     }
     
 }
  /* rotate 60deg */
 @keyframes plate-animation-2 {
-    0%{
+    0%,10%{
         transform: rotate(60deg);
     }
-    50% {
+    40%,60% {
         transform: translateX(-25px) translateY(-43.30125px) rotate(60deg);
+        background-image: linear-gradient();
     }
-    100% {
+    90%,100% {
         transform: rotate(60deg);
     }
 }
  /* rotate 120deg */
  @keyframes plate-animation-3 {
-    0%{
+    0%,10%{
         transform: rotate(120deg);
     }
-    50% {
+    40%,60% {
         transform: translateX(25px) translateY(-43.30125px) rotate(120deg);
     }
-    100% {
+    90%,100% {
         transform: rotate(120deg);
     }
 }
 
 /* rotate 180deg */
 @keyframes plate-animation-4 {
-    0%{
+    0%,10%{
         transform: rotate(180deg);
     }
-    50% {
+    40%,60% {
         transform: translateX(50px) rotate(180deg);
     }
-    100% {
+    90%,100% {
         transform: rotate(180deg);
     }
 }
 
 /* rotate 240deg */
 @keyframes plate-animation-5 {
-    0%{
+    0%,10%{
         transform: rotate(240deg);
     }
-    50% {
+    40%,60% {
         transform: translateX(25px) translateY(43.30125px) rotate(240deg);
     }
-    100% {
+    90%,100% {
         transform: rotate(240deg);
     }
 }
 
 /* rotate 300deg */
 @keyframes plate-animation-6 {
-    0%{
+    0%,10%{
         transform: rotate(300deg);
     }
-    50% {
+    40%,60% {
         transform: translateX(-25px) translateY(43.30125px) rotate(300deg);
     }
-    100% {
+    90%,100% {
         transform: rotate(300deg);
     }
 }
