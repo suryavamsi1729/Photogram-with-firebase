@@ -1,6 +1,6 @@
 import "@/components/css/layout.css";
 import { IBasicFCProps } from "@/types";
-import { NavBar,NavBarItem,NavBarItemsConatiner,BandLogo,UserComp } from "./navigation";
+import { NavBar,NavBarItem,NavBarItemsConatiner,BandLogo,UserComp } from "../ui/navigation";
 import { useLocation,useNavigate } from "react-router-dom";
 
 interface ILayout extends IBasicFCProps{

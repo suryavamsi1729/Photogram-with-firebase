@@ -3,9 +3,7 @@ import Login from "./pages/login";
 import Error from "./pages/error";
 import Signup from "./pages/signup";
 import Home from "./pages/home";
-import Post from "./pages/post";
-import Photos from "./pages/photos";
-import Profile from "./pages/profile";
+import CreatePost from "./pages/createpost";
 import PasswordReset from "./pages/login/forgotPassword";
 import Verification from "./pages/verification/inde";
 import { PrivateRoute } from "./components/privateRoutes";
@@ -41,18 +39,8 @@ export const router = createBrowserRouter([
                 errorElement:<Error/>
             },
             {
-                path:"/post",
-                element:<Post/>,
-                errorElement:<Error/>
-            },
-            {
-                path:"/photos",
-                element:<Photos/>,
-                errorElement:<Error/>
-            },
-            {
-                path:"/profile",
-                element:<Profile/>,
+                path:"/create-post",
+                element:<CreatePost/>,
                 errorElement:<Error/>
             }
         ],

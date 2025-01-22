@@ -7,7 +7,7 @@ interface ICmerashetterLoader{
 const CmerashetterLoader:React.FC<ICmerashetterLoader> = ()=>{
     return (
         <>
-            <div className="w-screen h-screen absolute top-0 left-0 bg-white backdrop-blur-sm z-50">
+            <div className="w-screen h-screen absolute top-0 left-0 bg-zinc-950">
                 <div className="absolute inset-0 flex justify-center items-center">
                     <div className="w-[120px] h-[120px] relative rounded-full bg-white flex justify-center items-center ring-4 ring-black ring-offset-4 overflow-hidden">   
                         <div className="plates-container w-[300px] h-[300px] absolute ">
