@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocation,useNavigate } from "react-router-dom";
 import {Label}  from "@/components/ui/label";
@@ -7,6 +7,8 @@ import Spinner from "@/components/ui/sipinner";
 import FileUploder from "@/components/fileuploder";
 import { useUseAuth } from "@/context/userAuthContex";
 import { FileEntry, Post } from "@/types";
+import PhotoPreViewModel from "@/components/model/photoPreViewModel";
+import { OutputFileEntry } from "@uploadcare/react-uploader";
 
 interface ICreatePost{
 
@@ -14,6 +16,7 @@ interface ICreatePost{
 
 const CreatePost:React.FC <ICreatePost> = ()=>{
     const {user} = useUseAuth();
+    const [isOpen,setOpen] = useState<boolean>(false);
     const [fileEntry,setFileEntry] =useState<FileEntry>({
         files:[],
     });
@@ -29,6 +32,11 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
     const location = useLocation();
     const navigate = useNavigate();
 
+    const handleRemoveClick = useCallback(
+        (uuid: OutputFileEntry['uuid']) => setFileEntry({files:fileEntry.files.filter(f => f.uuid !== uuid)}),
+        [fileEntry, setFileEntry],
+    );
+
     // handelsubmit function/
 
     const handelsubmit = (e:React.MouseEvent<HTMLFormElement>)=>{
@@ -38,7 +46,8 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
 
     return (
         <>
-            <div className="w-full h-full flex flex-col justify-start items-center px-8 py-4 gap-4">
+            <PhotoPreViewModel handleRemoveClick={handleRemoveClick} isOpen={isOpen} setOpen={setOpen} data={fileEntry}/>
+            <div className="w-full h-full flex flex-col justify-start items-center px-8 py-2 gap-3">
                 <div className="w-full h-auto p-1 flex flex-row justify-start items-center">
                     <div onClick={()=>{navigate(location.state.from.pathname)}} className="w-9 h-9 p-1 flex flex-col justify-center items-center bg-pink-200 rounded-full hover:cursor-pointer">
                         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -48,22 +57,22 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
                 </div>
                 <div className="w-full grow flex flex-col justify-start items-center">
                     <Card className="h-auto px-2 border-zinc-500/30 bg-transparent">
-                        <form className="w-full h-auto flex flex-col justify-start items-center gap-4" onSubmit={handelsubmit}>
+                        <form className="w-full h-auto flex flex-col justify-start items-center gap-3" onSubmit={handelsubmit}>
                             <CardHeader className="p-4 py-6 space-y-2">
                                 <CardTitle className="text-2xl text-slate-50">Frame It & Share It</CardTitle>
                                 <CardDescription className="text-zinc-300/60 font-normal">
                                     Capture your moments, frame them with creativity, and share your unique perspective with the world. Let your photos tell your story!
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="w-full h-auto grid gap-8">
+                            <CardContent className="w-full h-auto grid gap-6">
                                 <div className="flex flex-col gap-2">
                                     <Label  className="text-slate-50" htmlFor="caption"> Caption</Label>
                                     <Textarea value={post.caption} onChange={(e)=>setPost({...post,caption:e.target.value})} className="px-4 py-3 focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"  id="caption" placeholder="What's the story behind this shot? Add a caption to share your thoughts!"/>
                                 </div>
                                 <div className="flex flex-col gap-4">
                                     <Label  className="text-slate-50" htmlFor="photos"> Photos</Label>
-                                    <FileUploder fileEntry={fileEntry} onChange={setFileEntry} />
-                                    <div className="w-full h-32 hidden"></div>
+                                    <FileUploder fileEntry={fileEntry} onChange={setFileEntry} isOpen={isOpen} setOpen={setOpen} />
+                                    
                                 </div>
                             </CardContent>
                             <CardFooter className="w-full h-auto flex flex-col">
