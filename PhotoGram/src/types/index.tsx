@@ -1,3 +1,4 @@
+import { OutputFileEntry } from "@uploadcare/react-uploader";
 
 export interface UserSignIn{
     email:string,
@@ -25,4 +26,22 @@ export interface IResetPassword {
 export interface IBasicFCProps{
     children?:React.ReactNode,
     className?: string,
+}
+
+export interface Post{
+    caption:string,
+    likes:number,
+    photos: PhotoMeta[],
+    userLikes: [],
+    userId:String|null,
+    date:Date, 
+}
+
+export interface PhotoMeta{
+    cdnUrl: string,
+    uuid:string,
+}
+
+export interface FileEntry{
+    files: OutputFileEntry[],
 }

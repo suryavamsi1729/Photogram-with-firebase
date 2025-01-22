@@ -4,16 +4,38 @@ import { useLocation,useNavigate } from "react-router-dom";
 import {Label}  from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Spinner from "@/components/ui/sipinner";
+import FileUploder from "@/components/fileuploder";
+import { useUseAuth } from "@/context/userAuthContex";
+import { FileEntry, Post } from "@/types";
 
 interface ICreatePost{
 
 }
 
 const CreatePost:React.FC <ICreatePost> = ()=>{
+    const {user} = useUseAuth();
+    const [fileEntry,setFileEntry] =useState<FileEntry>({
+        files:[],
+    });
+    const [post,setPost] = useState<Post>({
+        caption: "",
+        likes: 0,
+        photos: [],
+        userLikes: [],
+        userId: null,
+        date: new Date(), 
+    });
     const [loading,setLoading] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(location.state.from.pathname);
+
+    // handelsubmit function/
+
+    const handelsubmit = (e:React.MouseEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        setLoading(true);
+    }
+
     return (
         <>
             <div className="w-full h-full flex flex-col justify-start items-center px-8 py-4 gap-4">
@@ -26,7 +48,7 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
                 </div>
                 <div className="w-full grow flex flex-col justify-start items-center">
                     <Card className="h-auto px-2 border-zinc-500/30 bg-transparent">
-                        <form className="w-full h-auto flex flex-col justify-start items-center gap-4" onSubmit={(e)=>{e.preventDefault()}}>
+                        <form className="w-full h-auto flex flex-col justify-start items-center gap-4" onSubmit={handelsubmit}>
                             <CardHeader className="p-4 py-6 space-y-2">
                                 <CardTitle className="text-2xl text-slate-50">Frame It & Share It</CardTitle>
                                 <CardDescription className="text-zinc-300/60 font-normal">
@@ -36,10 +58,11 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
                             <CardContent className="w-full h-auto grid gap-8">
                                 <div className="flex flex-col gap-2">
                                     <Label  className="text-slate-50" htmlFor="caption"> Caption</Label>
-                                    <Textarea className="px-4 py-3 focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"  id="caption" placeholder="What's the story behind this shot? Add a caption to share your thoughts!"/>
+                                    <Textarea value={post.caption} onChange={(e)=>setPost({...post,caption:e.target.value})} className="px-4 py-3 focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"  id="caption" placeholder="What's the story behind this shot? Add a caption to share your thoughts!"/>
                                 </div>
-                                <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-4">
                                     <Label  className="text-slate-50" htmlFor="photos"> Photos</Label>
+                                    <FileUploder fileEntry={fileEntry} onChange={setFileEntry} />
                                     <div className="w-full h-32 hidden"></div>
                                 </div>
                             </CardContent>

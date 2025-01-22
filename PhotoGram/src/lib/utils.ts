@@ -7,7 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 
 export function navgationCheck(path:string,itemPath:string):boolean{
     const pathElement = path.split("/")[1];
-    console.log(pathElement);
     if(pathElement === itemPath.slice(1,)){
       return true;
     }
