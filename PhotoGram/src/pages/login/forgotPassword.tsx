@@ -96,7 +96,7 @@ const forgotPassword : React.FC<IPasswordReset> = ()=>{
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-col">
-                        <button  className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
+                              <button  className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
                                 {
                                     loading?
                                     <>

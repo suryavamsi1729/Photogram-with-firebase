@@ -197,52 +197,52 @@ const Login:React.FunctionComponent <ILogInProps> = () => {
                             </div>
                         </div>
                         <div className="grid gap-2">
-                                <Label className="text-slate-50" htmlFor="email">Email</Label>
-                                <Input 
-                                    className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"
-                                    id="email" 
-                                    type="email" 
-                                    placeholder="m@example.com" 
-                                    value={userInfo.email}
-                                    onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                                        setUserInfo({...userInfo,email:e.target.value})
-                                    }}
-                                    />
-                                
-                                </div>
-                                <div className="grid gap-2">
-                                <Label className="text-slate-50" htmlFor="password">Password</Label>
-                                <Input 
+                            <Label className="text-slate-50" htmlFor="email">Email</Label>
+                            <Input 
                                 className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"
-                                id="password" 
-                                type="password"
-                                value={userInfo.password}
+                                id="email" 
+                                type="email" 
+                                placeholder="m@example.com" 
+                                value={userInfo.email}
                                 onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                                    setUserInfo({...userInfo,password:e.target.value})
+                                    setUserInfo({...userInfo,email:e.target.value})
                                 }}
                                 />
+                                
+                        </div>
+                        <div className="grid gap-2">
+                            <Label className="text-slate-50" htmlFor="password">Password</Label>
+                            <Input 
+                            className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"
+                            id="password" 
+                            type="password"
+                            value={userInfo.password}
+                            onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
+                                setUserInfo({...userInfo,password:e.target.value})
+                            }}
+                            />
+                        </div>
+                        <div className="grid">
+                            <span onClick={()=>{navigate("/forgot-password")}} className="justify-self-end hover:cursor-pointer hover:text-indigo-600 text-xs text-indigo-500 font-semibold">Forgot Password?</span>
+                        </div>
+                    </CardContent>
+                    <CardFooter className="flex flex-col">
+                        <button className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
+                        {
+                            loading?
+                            <>
+                                <div className="w-8 h-8">
+                                    <Spinner/>
                                 </div>
-                                <div className="grid">
-                                    <span onClick={()=>{navigate("/forgot-password")}} className="justify-self-end hover:cursor-pointer hover:text-indigo-600 text-xs text-indigo-500 font-semibold">Forgot Password?</span>
-                                </div>
-                            </CardContent>
-                            <CardFooter className="flex flex-col">
-                                <button className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
-                                {
-                                    loading?
-                                    <>
-                                        <div className="w-8 h-8">
-                                            <Spinner/>
-                                        </div>
-                                        <p className="text-base font-medium text-indigo-600">Loading...</p>
-                                    </>
-                                    :"Login"
-                                }
-                                </button>
-                                <p className="mt-3 text-sm  text-center text-slate-100/90">
-                                    Don't have an Account ? <Link to="/signup">signup</Link>
-                                </p>
-                            </CardFooter>
+                                <p className="text-base font-medium text-indigo-600">Loading...</p>
+                            </>
+                            :"Login"
+                        }
+                        </button>
+                        <p className="mt-3 text-sm  text-center text-slate-100/90">
+                            Don't have an Account ? <Link to="/signup">signup</Link>
+                        </p>
+                    </CardFooter>
                 </form>
             </Card>
         </AuthLayout>

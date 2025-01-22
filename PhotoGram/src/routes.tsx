@@ -1,11 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./pages/login";
 import Error from "./pages/error";
-import Signup from "./pages/signup";
-import Home from "./pages/home";
-import CreatePost from "./pages/createpost";
+import Login from "./pages/login";
 import PasswordReset from "./pages/login/forgotPassword";
 import Verification from "./pages/verification/inde";
+import Signup from "./pages/signup";
+import Home from "./pages/home";
+import Post from "./pages/post";
+import PostHome from "./pages/post/home";
+import CreatePost from "./pages/post/create";
 import { PrivateRoute } from "./components/privateRoutes";
 
 
@@ -39,9 +41,22 @@ export const router = createBrowserRouter([
                 errorElement:<Error/>
             },
             {
-                path:"/create-post",
-                element:<CreatePost/>,
-                errorElement:<Error/>
+                path:"/post",
+                element:<Post/>,
+                errorElement:<Error/>,
+                children:[
+                    {
+                        path:"",
+                        element:<PostHome/>,
+                        errorElement:<Error/>
+                    },
+                    {
+                        path:"create-post",
+                        element:<CreatePost/>,
+                        errorElement:<Error/>
+                    }
+
+                ]
             }
         ],
     },
