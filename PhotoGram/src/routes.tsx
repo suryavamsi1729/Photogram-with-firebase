@@ -9,6 +9,7 @@ import Post from "./pages/post";
 import PostHome from "./pages/post/home";
 import CreatePost from "./pages/post/create";
 import { PrivateRoute } from "./components/privateRoutes";
+import Gallery from "./pages/gallery";
 
 
 export const router = createBrowserRouter([
@@ -57,7 +58,12 @@ export const router = createBrowserRouter([
                     }
 
                 ]
-            }
+            },
+            {
+                path: "/gallery",
+                element:<Gallery/>,
+                errorElement:<Error/>
+            },
         ],
     },
     
