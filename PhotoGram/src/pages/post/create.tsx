@@ -42,18 +42,23 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
     const handelsubmit = (e:React.MouseEvent<HTMLFormElement>)=>{
         e.preventDefault();
         setLoading(true);
-        const photos:PhotoMeta[] = fileEntry.files.map((image)=>{
+        const uplodePhotos:PhotoMeta[] = fileEntry.files.map((image)=>{
             return {
                 cdnUrl: image.cdnUrl,
                 uuid : image.uuid,
             }
         });
-        if(user!== null){
-            setPost({...post,photos:photos,userId:user?.uid || null});
-            console.log(post);
+        const newPost :Post={
+            ...post,
+            photos:uplodePhotos,
+            userId:user?.uid || null,
         }
-
-        
+        console.log(fileEntry);
+        console.log(user?.uid);
+        if(user!== null){
+            console.log(newPost);
+        }
+        setLoading(false);
     }
 
     return (

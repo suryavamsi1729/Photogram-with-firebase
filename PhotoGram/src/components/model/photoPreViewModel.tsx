@@ -57,7 +57,7 @@ const PhotoPreViewModel : React.FC<IPhotoPreViewModel> = ({data,isOpen,setOpen,h
                         {
                             data.files.map((image,index)=>{
                                 return(
-                                    <div className={`group relative w-full h-36 bg-zinc-900/90  ${checkSelect(image.uuid)?"border-[3px] border-blue-600":"border-[2px] border-zinc-700/90"} rounded-md flex flex-col justify-center items-center overflow-hidden`}>
+                                    <div key={image.uuid}  className={`group relative w-full h-36 bg-zinc-900/90  ${checkSelect(image.uuid)?"border-[3px] border-blue-600":"border-[2px] border-zinc-700/90"} rounded-md flex flex-col justify-center items-center overflow-hidden`}>
                                         <div className={`absolute w-full h-full`}>
                                             <img className="w-full h-full object-contain " key={index} src={image.cdnUrl || ""} alt={image.name}/>
                                         </div>
