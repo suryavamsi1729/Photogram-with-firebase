@@ -9,6 +9,7 @@ import { useUseAuth } from "@/context/userAuthContex";
 import { FileEntry, PhotoMeta, Post } from "@/types";
 import PhotoPreViewModel from "@/components/model/photoPreViewModel";
 import { OutputFileEntry } from "@uploadcare/react-uploader";
+import { createPost } from "@/repository/post.service";
 
 interface ICreatePost{
 
@@ -39,7 +40,7 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
 
     // handelsubmit function/
 
-    const handelsubmit = (e:React.MouseEvent<HTMLFormElement>)=>{
+    const handelsubmit =  async (e:React.MouseEvent<HTMLFormElement>)=>{
         e.preventDefault();
         setLoading(true);
         const uplodePhotos:PhotoMeta[] = fileEntry.files.map((image)=>{
@@ -53,10 +54,14 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
             photos:uplodePhotos,
             userId:user?.uid || null,
         }
-        console.log(fileEntry);
-        console.log(user?.uid);
+        // console.log(fileEntry);
+        // console.log(user?.uid);
         if(user!== null){
-            console.log(newPost);
+            await createPost(newPost);
+            navigate("/",{state:{from:location}});
+        }
+        else{
+            navigate("/login",{state:{from:location}});
         }
         setLoading(false);
     }
