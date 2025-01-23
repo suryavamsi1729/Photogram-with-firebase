@@ -3,6 +3,7 @@ import { DropDownContainer,DropDownItem } from "./dropdown";
 import { LogOut,Settings,UserRoundPen,MoveRight,BellIcon } from 'lucide-react';
 import { useState,useEffect, useRef } from "react";
 import { useUseAuth } from "@/context/userAuthContex";
+import { cn } from "@/lib/utils";
 
 interface INavBar extends IBasicFCProps{
 
@@ -15,7 +16,7 @@ interface INavBarItemsConatiner extends IBasicFCProps{
 }
 interface INavBarItem extends IBasicFCProps{
     style?: React.CSSProperties,
-    data:string,
+    data?:string,
     onClick?: (e:React.MouseEvent<HTMLDivElement>)=>void,
 }
 interface IUserComp extends IBasicFCProps{
@@ -24,8 +25,8 @@ interface IUserComp extends IBasicFCProps{
 
 const NavBar:React.FC<INavBar> = ({children,className})=>{
     return (
-        <div className={`w-full sticky top-0 ${className}`}>
-            <div className="w-full flex justify-start items-center gap-6">
+        <div id="navbar" className={cn("w-full h-auto",className)}>
+            <div className="w-full h-auto flex justify-start items-center gap-6">
                 {children}
             </div>
         </div>
@@ -33,14 +34,14 @@ const NavBar:React.FC<INavBar> = ({children,className})=>{
 }
 const BandLogo:React.FC<IBrandIcon> = ({children,className})=>{
     return (
-        <div className={`flex justify-center items-center gap-3 ${className}`}>
+        <div id="barandLogo" className={cn("flex justify-center items-center gap-3 ",className)}>
             {children}
         </div>
     )
 }
 const NavBarItemsConatiner:React.FC<INavBarItemsConatiner> = ({children,className})=>{
     return (
-        <div className={`grow inline-flex px-5 justify-end items-center md:gap-10 lg:gap-16 ${className}`}>
+        <div id="navbarItemContainer" className={cn("grow inline-flex px-5 justify-end items-center md:gap-10 lg:gap-16",className)}>
             {children}
         </div>
     );
@@ -49,7 +50,7 @@ const NavBarItemsConatiner:React.FC<INavBarItemsConatiner> = ({children,classNam
 const NavBarItem:React.FC<INavBarItem> = ({children,className,style,data,onClick})=>{
     return(
         <>
-            <div onClick={onClick} data-content={data} className={`${className}`} style={style}>
+            <div id="navbarItem" onClick={onClick} data-content={data} className={cn(className)} style={style}>
                 {children}
             </div>
         </>
