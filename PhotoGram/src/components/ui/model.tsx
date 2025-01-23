@@ -48,7 +48,7 @@ const ModelConatiner  = forwardRef<HTMLDivElement,IModelContainer>(
             <div 
                 id="ModelContainer" 
                 className={
-                    cn("w-8/12 h-auto p-4 flex flex-col justify-start items-center gap-4 border border-zinc-500 rounded-md",
+                    cn("w-8/12 h-auto p-4 flex flex-col justify-start items-center gap-4",
                     className)
                 }
                 ref={ref}>

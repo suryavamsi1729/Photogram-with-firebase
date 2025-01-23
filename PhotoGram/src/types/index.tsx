@@ -33,13 +33,13 @@ export interface Post{
     likes:number,
     photos: PhotoMeta[],
     userLikes: [],
-    userId:String|null,
+    userId: String|null,
     date:Date, 
 }
 
 export interface PhotoMeta{
-    cdnUrl: string,
-    uuid:string,
+    cdnUrl: string | null,
+    uuid:string | null,
 }
 
 export interface FileEntry{
