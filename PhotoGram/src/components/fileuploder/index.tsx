@@ -6,13 +6,13 @@ import '@uploadcare/react-uploader/core.css';
 interface IFileUploder{
     fileEntry: FileEntry,
     onChange: (fileEntry:FileEntry)=>void,
-    isOpen:boolean,
+    isOpen?:boolean,
     setOpen:(isOpen:boolean)=>void,
 }
 
 
 
-const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,isOpen,setOpen}) =>{
+const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,setOpen}) =>{
     const ctxProviderRef = useRef<InstanceType<UploadCtxProvider>>(null);
     const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry<'success'>[]>([]);
 
