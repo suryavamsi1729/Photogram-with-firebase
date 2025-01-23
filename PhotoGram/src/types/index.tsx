@@ -45,3 +45,13 @@ export interface PhotoMeta{
 export interface FileEntry{
     files: OutputFileEntry[],
 }
+
+export interface PostResponse{
+    id:string,
+    caption:string,
+    likes:number,
+    photos: PhotoMeta[],
+    userLikes: [],
+    userId: String|null,
+    date:Date,
+}
