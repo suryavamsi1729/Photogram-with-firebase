@@ -1,6 +1,6 @@
 import { IBasicFCProps } from "@/types";
 import { DropDownContainer,DropDownItem } from "./dropdown";
-import { LogOut,Settings,UserRoundPen,MoveRight } from 'lucide-react';
+import { LogOut,Settings,UserRoundPen,MoveRight,BellIcon } from 'lucide-react';
 import { useState,useEffect, useRef } from "react";
 import { useUseAuth } from "@/context/userAuthContex";
 
@@ -106,6 +106,13 @@ const UserComp:React.FC<IUserComp> = ({className})=>{
                         <div className="flex justify-start items-center gap-3">
                             <Settings className="group-hover:text-slate-50 text-slate-50/40 h-5"/>
                             <p className="text-base group-hover:text-slate-50 text-slate-50/40 font-normal">Settings</p>
+                        </div>
+                        <MoveRight className="w-4 -translate-x-3 text-pink-600/0 group-hover:text-pink-600/75 group-hover:translate-x-0 transition-[transform,color] delay-200 duration-200 ease-out"/>
+                    </DropDownItem>
+                    <DropDownItem className="group rounded-md p-2 pr-4 hover:pl-5 hover:bg-zinc-700/40 hover:cursor-pointer transition-all duration-300 ease-in-out">
+                        <div className="flex justify-start items-center gap-3">
+                            <BellIcon className="group-hover:text-slate-50 text-slate-50/40 h-5"/>
+                            <p className="text-base group-hover:text-slate-50 text-slate-50/40 font-normal">Notifications</p>
                         </div>
                         <MoveRight className="w-4 -translate-x-3 text-pink-600/0 group-hover:text-pink-600/75 group-hover:translate-x-0 transition-[transform,color] delay-200 duration-200 ease-out"/>
                     </DropDownItem>

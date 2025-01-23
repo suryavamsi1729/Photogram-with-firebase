@@ -20,16 +20,16 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
             link:"/expore"
         },
         {
+            name:"Gallary",
+            link:"/gallery"
+        },
+        {
             name:"Post",
             link:"/post"
         },
         {
             name:"Message",
             link:"/message"
-        },
-        {
-            name:"Notification",
-            link:"/notification"
         }
     ]
 
