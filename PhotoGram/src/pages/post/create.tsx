@@ -27,7 +27,7 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
         photos: [],
         userLikes: [],
         userId: null,
-        date: new Date(), 
+        date: new Date().toISOString(), 
     });
     const [loading,setLoading] = useState(false);
     const location = useLocation();
@@ -53,6 +53,7 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
             ...post,
             photos:uplodePhotos,
             userId:user?.uid || null,
+            date: new Date().toISOString(),
         }
         // console.log(fileEntry);
         // console.log(user?.uid);

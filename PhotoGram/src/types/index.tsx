@@ -34,7 +34,7 @@ export interface Post{
     photos: PhotoMeta[],
     userLikes: [],
     userId: String|null,
-    date:Date, 
+    date:string, 
 }
 
 export interface PhotoMeta{
@@ -53,5 +53,5 @@ export interface PostResponse{
     photos: PhotoMeta[],
     userLikes: [],
     userId: String|null,
-    date:Date,
+    date:string,
 }

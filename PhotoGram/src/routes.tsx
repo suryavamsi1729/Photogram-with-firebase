@@ -10,6 +10,8 @@ import PostHome from "./pages/post/home";
 import CreatePost from "./pages/post/create";
 import { PrivateRoute } from "./components/privateRoutes";
 import Gallery from "./pages/gallery";
+import { PhotoGallery } from "./pages/gallery/photogaller";
+import { PhotoGalleryList } from "./pages/gallery/photogallerylist";
 
 
 export const router = createBrowserRouter([
@@ -62,7 +64,20 @@ export const router = createBrowserRouter([
             {
                 path: "/gallery",
                 element:<Gallery/>,
-                errorElement:<Error/>
+                errorElement:<Error/>,
+                children:[
+                    {
+                        path:"",
+                        element:<PhotoGallery/>,
+                        errorElement:<Error/>
+                    },
+                    {
+                        path:"list-view",
+                        element:<PhotoGalleryList/>,
+                        errorElement:<Error/>
+                    },
+
+                ]
             },
         ],
     },

@@ -1,48 +1,16 @@
-import { useUseAuth } from "@/context/userAuthContex";
+
 import { cn } from "@/lib/utils";
-import { getPostByUserId } from "@/repository/post.service";
-import { IBasicFCProps, Post, PostResponse } from "@/types";
-import { useEffect, useState } from "react";
-import { HeartIcon,ChevronRight,ChevronRightIcon } from "lucide-react";
+import { IBasicFCProps, PostResponse } from "@/types";
+import { HeartIcon} from "lucide-react";
+import { useOutletContext } from "react-router-dom";
 
 interface IPhotoGallery extends IBasicFCProps{
 
 }
 
 const PhotoGallery : React.FC<IPhotoGallery> = ({className})=>{
-    const {user} = useUseAuth();
-    const [postData,setPostData] = useState<PostResponse[]>([]);
-
-    const getAllPost = async(id:string)=>{
-        try{
-            const querySnapShot = await getPostByUserId(id);
-            const tempArry:PostResponse[] = [];
-            if(querySnapShot.size>0){
-                querySnapShot.forEach((doc)=>{
-                    const data = doc.data() as Post;
-                    const responsObj : PostResponse = {
-                        id:doc.id,
-                        ...data,
-                    };
-                    tempArry.push(responsObj);
-                });
-                setPostData(tempArry);
-            }
-            else{
-                console.log("no data");
-            }
-
-        }
-        catch(e){
-            console.log(e);
-        }
-    }
-
-    useEffect(()=>{
-        if(user?.uid != null){
-            getAllPost(user.uid);
-        }
-    },[]);
+    const postData = useOutletContext<PostResponse[]>();
+    
     return(
         <>
             <div id="PhotoGallery" className={cn("w-full h-full px-8 py-6",className)}>
@@ -50,7 +18,7 @@ const PhotoGallery : React.FC<IPhotoGallery> = ({className})=>{
                     {
                         postData.map((post)=>{
                             return(
-                                <PhotoGalleryItem post={post}/>
+                                <PhotoGalleryItem key={post.id} post={post}/>
                             );
                         })
                     }
