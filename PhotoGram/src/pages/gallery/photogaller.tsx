@@ -1,6 +1,6 @@
 
 import { cn } from "@/lib/utils";
-import { IBasicFCProps, PostResponse } from "@/types";
+import { IBasicFCProps, OutletPost, PostResponse } from "@/types";
 import { HeartIcon} from "lucide-react";
 import { useOutletContext } from "react-router-dom";
 
@@ -9,7 +9,7 @@ interface IPhotoGallery extends IBasicFCProps{
 }
 
 const PhotoGallery : React.FC<IPhotoGallery> = ({className})=>{
-    const postData = useOutletContext<PostResponse[]>();
+    const {postData} = useOutletContext<OutletPost>()
     
     return(
         <>

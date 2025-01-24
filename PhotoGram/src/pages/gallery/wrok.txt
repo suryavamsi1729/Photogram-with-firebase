@@ -1,0 +1,3 @@
+
+crate contexapi are redex store for this page to reduce the props drilling this page become complex on mataning
+current we are passing the data using OutletContext as object by using context Api /ReduxStore this become Easy code become reusable and maintainble

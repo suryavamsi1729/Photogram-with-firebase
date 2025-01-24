@@ -55,3 +55,10 @@ export interface PostResponse{
     userId: String|null,
     date:string,
 }
+
+export interface OutletPost{
+    postData:PostResponse[],
+    setPostData: (postData:PostResponse[])=>void,
+    selectedPosts:PostResponse[],
+    setSelectedPosts:(selectedPosts:PostResponse[])=>void,
+}
