@@ -35,7 +35,7 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
 
     return(
         <>
-            <NavBar className="sticky top-0 px-6 py-2 z-50 bg-zinc-950">
+            <NavBar className="fixed top-0 px-6 py-2 z-50 bg-zinc-950">
                 <BandLogo className="relative h-12 leading-[48px] flex flex-col justify-center items-center text-[32px] gap-2 ">
                     <span className="absoulte top-1/2 inline-block leading-normal align-middle pl-6 py-0 text-slate-50 font-medium">LOGO</span>
                 </BandLogo>

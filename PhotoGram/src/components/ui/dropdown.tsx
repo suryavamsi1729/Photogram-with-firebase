@@ -11,7 +11,7 @@ interface IDropDownItem extends IBasicFCProps{
 const DropDownContainer:React.FC<IdropdownContainerContainer> = ({className,children})=>{
     return(
         <>
-            <div className={`w-64 flex flex-col gap-1 p-2 ${className}`}>
+            <div className={`w-64 flex flex-col gap-1 p-2 z-[100] ${className}`}>
                 {children}
             </div>
         </>

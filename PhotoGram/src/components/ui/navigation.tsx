@@ -95,7 +95,7 @@ const UserComp:React.FC<IUserComp> = ({className})=>{
             <p className="text-base font-normal text-pink-500">Surya</p>
             {
                 stateDropDown &&
-                <DropDownContainer className={`absolute top-10 right-0 z-50 bg-zinc-700/40 rounded-lg ${dropDownAnimationState?"animate-dropdownAnimation":"animate-dropdownRemoveAnimation"}`}>
+                <DropDownContainer className={`absolute top-10 right-0  bg-zinc-900 rounded-lg z-[200] ${dropDownAnimationState?"animate-dropdownAnimation":"animate-dropdownRemoveAnimation"}`}>
                     <DropDownItem className="group rounded-md p-2 pr-4 hover:pl-5 hover:bg-zinc-700/40 hover:cursor-pointer transition-all duration-300 ease-in-out">
                         <div className="flex justify-start items-center gap-3">
                             <UserRoundPen className="group-hover:text-slate-50 text-slate-50/40 h-5"/>
