@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { IBasicFCProps, PostResponse } from "@/types";
+import { useEffect } from "react";
+import { IBasicFCProps } from "@/types";
 import Layout from "@/components/layout/layout";
 import GalleryNavBar from "@/components/navbar/galleryNavBar";
 import { Outlet } from "react-router-dom";

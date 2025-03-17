@@ -8,7 +8,7 @@ interface IPostHome{
 const PostHome : React.FC<IPostHome> = ()=>{
     const location = useLocation();
     const navigate = useNavigate();
-    const [loading,setLoading] = useState(false);
+    const [loading,] = useState(false);
     return(
         <>
             <div className="w-auto h-full flex flex-col justify-start items-start py-16  gap-8">
