@@ -1,3 +1,3 @@
 
 export * from "./userActions";
-export * from "./postsActions";
+export * from "./userPostsActions";

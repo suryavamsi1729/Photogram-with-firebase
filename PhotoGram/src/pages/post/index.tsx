@@ -9,7 +9,7 @@ interface ICreatePostProps {
 const Post : React.FC <ICreatePostProps> = ()=>{
     return (
         <>
-            <Layout >
+            <Layout className="absolute min-h-full h-full">
                 <div  className="w-full h-full relative">
                     <video className="absolute -left-80 w-full h-full object-cover" muted loop autoPlay src={postbg}/>
                     <div className=" absolute inset-0 radialGradient">

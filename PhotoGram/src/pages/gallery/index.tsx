@@ -7,7 +7,7 @@ import { handelMultipleDelets } from "./utile";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
-import { fetchPosts } from "@/store/thunk/postsActions";
+import { fetchPosts } from "@/store/thunk/userPostsActions";
 import { selectPostSelectedPosts } from "@/store/selectors";
 import { deletePostsFromStore } from "@/store/actions";
 

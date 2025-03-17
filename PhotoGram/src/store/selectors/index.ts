@@ -1,3 +1,3 @@
 
 export * from "./userSelectors";
-export * from "./postSelectors";
+export * from "./userPostSelectors";

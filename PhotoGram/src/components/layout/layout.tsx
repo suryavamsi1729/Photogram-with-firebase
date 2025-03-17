@@ -23,12 +23,12 @@ const Layout:React.FC<ILayout> = ({className,children})=>{
     },[]);
     return (
         <>
-                <div className={`w-full min-h-screen flex flex-col justify-start items-center bg-zinc-950 ${className}`}>
+                <div className={`w-full min-h-screen flex flex-col justify-start items-center bg-zinc-950 `}>
                     <MainTopNavBar/>
-                    <div className="absolute w-full h-full pt-16">
+                    <div className={`w-full min-h-screen pt-16 ${className}`}>
                         {children}
                     </div>
-                    
+
                 </div>
         </>
     );

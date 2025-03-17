@@ -15,7 +15,7 @@ const intialValue:IPostsState = {
     errorMassege:null
 }
 
-const PostReducer = (state:IPostsState = intialValue , action:PostActions)=>{
+const UserPostReducer = (state: IPostsState = intialValue , action:PostActions)=>{
     let remingPosts:PostResponse[];
     switch (action.type) {
         
@@ -46,4 +46,4 @@ const PostReducer = (state:IPostsState = intialValue , action:PostActions)=>{
     }
 }
 
-export default PostReducer;
+export default UserPostReducer;
