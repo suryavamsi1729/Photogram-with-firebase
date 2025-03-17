@@ -1,9 +1,11 @@
 import React from "react";
 import { Toaster } from "./toaster";
+import { cn } from "@/lib/utils";
 interface IAuthLayoutProps {
     children:React.ReactNode|null,
+    className?:string,
 }
-const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
+const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children,className}) => {
     return (
         <div className="relative overflow-hidden w-screen h-screen flex flex-row justify-center items-center bg-zinc-950">
             <Toaster/>
@@ -23,7 +25,7 @@ const AuthLayout:React.FunctionComponent <IAuthLayoutProps> = ({children}) => {
                 <div className="circulargraidents absolute w-48 h-48 top-24 right-16 rounded-full z-10"></div>
                 <div className="circulargraidents absolute w-52 h-52 top-24 -left-[90%] rounded-full z-10"></div>
                 <div className="absolute inset-0 z-40"></div>
-                <div className="absolute max-w-sm rounded-xl bg-zinc-950  text-card-foreground z-40">
+                <div className={cn(`absolute max-w-sm rounded-xl bg-zinc-950  text-card-foreground z-40`,className)}>
                     {children}
                 </div>
             </div>

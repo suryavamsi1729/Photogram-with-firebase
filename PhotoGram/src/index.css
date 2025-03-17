@@ -149,3 +149,64 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+.profileuploder{
+  width: auto;
+  height: auto;
+
+}
+.profileuploder uc-file-uploader-regular uc-simple-btn uc-drop-area button span{
+    display: none;
+}
+.profileuploder uc-file-uploader-regular uc-simple-btn uc-drop-area button {
+   width: 24px;
+   height: 24px;
+   background-color: transparent;
+   border-radius: 50%;
+   padding: 0px;
+}
+.profileuploder uc-file-uploader-regular uc-simple-btn uc-drop-area button:focus {
+  border: 0px;
+}
+.profileuploder uc-file-uploader-regular uc-simple-btn uc-drop-area button svg {
+  width: 16px;
+  height: 16px;
+  color: transparent;
+  stroke-width: 2px;
+}
+.profileuploder uc-file-uploader-regular uc-simple-btn uc-drop-area button div {
+  display: none;
+}
+
+.skeleton-loading {
+  background-size: 200% 100%;
+  background-image: linear-gradient(
+    45deg,
+    rgba(39, 39, 42, 0.6) 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(39, 39, 42, 0.6) 70%
+  );
+  background-position: 100% 0;
+  animation: skeletonLoadingAnimation 2.25s linear infinite;
+}
+.skeleton-loading-img {
+  background-size: 200% 100%;
+  background-image: linear-gradient(
+    45deg,
+    rgba(39, 39, 42, 0.6) 30%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(39, 39, 42, 0.6) 70%
+  );
+  background-position: 100% 0;
+  animation: skeletonLoadingAnimation 1.75s linear infinite;
+}
+
+@keyframes skeletonLoadingAnimation {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+

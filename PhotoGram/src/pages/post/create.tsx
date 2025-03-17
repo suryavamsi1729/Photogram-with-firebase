@@ -11,6 +11,7 @@ import PhotoPreViewModel from "@/components/model/photoPreViewModel";
 import { OutputFileEntry } from "@uploadcare/react-uploader";
 import { createPost } from "@/repository/post.service";
 
+
 interface ICreatePost{
 
 }
@@ -58,7 +59,13 @@ const CreatePost:React.FC <ICreatePost> = ()=>{
         // console.log(fileEntry);
         // console.log(user?.uid);
         if(user!== null){
-            await createPost(newPost);
+            try{
+                await createPost(newPost);
+            }
+            catch(e){
+                console.log(e);
+            }
+            
             navigate("/",{state:{from:location}});
         }
         else{

@@ -2,6 +2,8 @@ import AuthLayout from "@/components/ui/authLayout";
 import ResetPassword from "../login/resetPassword";
 import VerifyEmail from "../signup/verifyEmail";
 import { useLocation } from "react-router-dom";
+
+
 interface IVerifcationProps{
 
 }

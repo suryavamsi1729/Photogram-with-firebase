@@ -12,6 +12,8 @@ import { auth } from "@/firebaseConfig";
 import { validatePassword ,sendEmailVerification} from "firebase/auth";
 import AuthLayout from "@/components/ui/authLayout";
 import { useToast } from "@/hooks/use-toast";
+import { createUser } from "@/repository/user.service";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 interface ISignUpProps {
 }
@@ -26,18 +28,26 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
     const navigate = useNavigate();
     const {signUp,googleSignIn,setLoading,loading} = useUseAuth();
     const [userInfo,setUserInfo] = useState<UserSignIn>(initalValue);
+    const [, setUid] = useLocalStorage<string | null>("uid", null);
     const handelSubmit = async (e:React.MouseEvent<HTMLFormElement>)=>{
         e.preventDefault();
         setLoading(true);
         try{
             const status = await validatePassword(auth,userInfo.confimePassword);
             if(status.isValid){
-                console.log("surya");
                 var user = await signUp(userInfo.email,userInfo.confimePassword);
+                // const continueUrl = encodeURIComponent(`http://localhost:3000/email-verification?uid=${userId}`);
                 await sendEmailVerification(user.user,{
-                    url: "http://localhost:3000/email-verification",
+                    url: `http://localhost:3000/email-verification?uid=${user.user.uid}`,
                     handleCodeInApp:true,
                 });
+                await createUser({
+                    userId:user.user.uid,
+                    email:user.user.email || null,
+                    password:userInfo.confimePassword,
+                    emailverified:user.user.emailVerified,
+                });
+                setUid(user.user.uid);
                 alert(`verifcation email is send to ${user.user.email}`);
                 navigate("/login");
             }
@@ -117,15 +127,15 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
     return (
         <AuthLayout>
             <Card className="border-zinc-500/30 bg-transparent">
-                            <form onSubmit={handelSubmit}>
-                            <CardHeader className="space-y-1">
-                                <CardTitle className="text-2xl text-slate-50">Create an account</CardTitle>
-                                <CardDescription className="text-zinc-400">
-                                Enter your email below to create your account
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="grid gap-4">
-                                <div className="grid grid-cols-2 gap-6">
+                <form onSubmit={handelSubmit}>
+                    <CardHeader className="space-y-1">
+                        <CardTitle className="text-2xl text-slate-50">Create an account</CardTitle>
+                        <CardDescription className="text-zinc-400">
+                        Enter your email below to create your account
+                        </CardDescription>
+                    </CardHeader>
+                        <CardContent className="grid gap-4">
+                            <div className="grid grid-cols-2 gap-6">
                                 <Button className="bg-transparent text-slate-50 hover:text-slate-50 hover:bg-zinc-500/30 border-zinc-500/30 hover:border-0" variant="outline">
                                     <Icons.gitHub className="mr-2 h-4 w-4" />
                                     Github
@@ -134,8 +144,8 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                     <Icons.google className="mr-2 h-4 w-4" />
                                     Google
                                 </Button>
-                                </div>
-                                <div className="relative">
+                            </div>
+                            <div className="relative">
                                 <div className="absolute inset-0 flex items-center">
                                     <span className="w-full border-t border-zinc-500/40" />
                                 </div>
@@ -144,8 +154,8 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                     Or continue with
                                     </span>
                                 </div>
-                                </div>
-                                <div className="grid gap-2">
+                            </div>
+                            <div className="grid gap-2">
                                 <Label className="text-slate-50"  htmlFor="email">Email</Label>
                                 <Input 
                                     className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"
@@ -157,8 +167,8 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                         setUserInfo({...userInfo,email:e.target.value})
                                     }}
                                     />
-                                </div>
-                                <div className="grid gap-2">
+                            </div>
+                            <div className="grid gap-2">
                                 <Label className="text-slate-50"  htmlFor="password">Password</Label>
                                 <Input
                                 className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50" 
@@ -170,8 +180,8 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                 }}
                                 />
                                 <span className={`${userInfo.errorPassword === ""?"invisible":"visible"} text-xs text-red-600 font-normal`}>{userInfo.errorPassword}</span>
-                                </div>
-                                <div className="grid gap-2">
+                            </div>
+                            <div className="grid gap-2">
                                 <Label className="text-slate-50"  htmlFor="confimpassword">Confim Password</Label>
                                 <Input 
                                 className="focus-visible:ring-transparent focus-visible:outline-none focus-visible:ring-0  focus-visible:ring-offset-0  text-slate-50/60 focus:text-slate-50 bg-zinc-900/40 border-[1px] focus:bg-zinc-950 border-zinc-500/30 focus:border-slate-50"
@@ -182,32 +192,31 @@ const Signup:React.FunctionComponent <ISignUpProps> = () => {
                                     setUserInfo({...userInfo,confimePassword:e.target.value})
                                 }}
                                 />
+                            </div>
+                        </CardContent>
+                    <CardFooter className="flex flex-col">
+                        <div className="relative w-full">
+                            <Button className="w-full bg-slate-50 hover:bg-slate-50/90 border-0 text-zinc-950" type="submit">
+                            {
+                                loading?null:"Create Account"
+                            }
+                            </Button>
+                            {
+                                loading
+                                ?<div className="absolute inset-0 flex justify-center items-center gap-2 ">
+                                    <div className="w-8 h-8">
+                                        <Spinner/>
+                                    </div>
+                                    <p className="text-base text-indigo-600 font-medium">Loading...</p>
                                 </div>
-                            </CardContent>
-                            <CardFooter className="flex flex-col">
-                                <div className="relative w-full">
-                                    <Button className="w-full bg-slate-50 hover:bg-slate-50/90 border-0 text-zinc-950" type="submit">
-                                    {
-                                        loading?null:"Create Account"
-                                    }
-                                    </Button>
-                                    {
-                                        loading
-                                        ?<div className="absolute inset-0 flex justify-center items-center gap-2 ">
-                                            <div className="w-8 h-8">
-                                                <Spinner/>
-                                            </div>
-                                            <p className="text-base text-indigo-600 font-medium">Loading...</p>
-                                        </div>
-                                        :null
-                                    }
-
-                                </div>
-                                <p className="mt-3 text-sm  text-center text-slate-100/90">
-                                    Alredy have an Account ? <Link to="/login">login</Link>
-                                </p>
-                            </CardFooter>
-                            </form>
+                                :null
+                            }   
+                        </div>
+                        <p className="mt-3 text-sm  text-center text-slate-100/90">
+                            Alredy have an Account ? <Link to="/login">login</Link>
+                        </p>
+                    </CardFooter>
+                </form>
             </Card>
         </AuthLayout>
     );

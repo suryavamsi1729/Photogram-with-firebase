@@ -12,6 +12,7 @@ import { PrivateRoute } from "./components/privateRoutes";
 import Gallery from "./pages/gallery";
 import { PhotoGallery } from "./pages/gallery/photogaller";
 import { PhotoGalleryList } from "./pages/gallery/photogallerylist";
+import AuthProfile from "./pages/profile/authprofile";
 
 
 export const router = createBrowserRouter([
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
         path:"/auth/action",
         element:<Verification/>,
         errorElement:<Error/>
+    },
+    {
+        path:"/profile-setup",
+        element:<AuthProfile/>,
+        errorElement:<Error/> 
     },
     {
         element: <PrivateRoute/>,//wraps the routes below and protect them

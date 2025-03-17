@@ -30,15 +30,10 @@ export const getAllPostData = async(id:string): Promise<PostResponse[]> =>{
 
 //utility function for deleting multiple post uind their ids
 
-export const handelMultipleDelets = async(selectedPosts:PostResponse[],postData:PostResponse[]):Promise<PostResponse[]> =>{
-    const removePostIds = selectedPosts.map((post)=>{
-        return post.id;
-    });
+export const handelMultipleDelets = async(selectedPosts:string[])=>{
     try {
-        await deleteMultiplePosts(removePostIds);//deleting posts by passing array of ids
-        return postData.filter((post)=> !removePostIds.includes(post.id));//setting the data to all reming post which not deleted
+        await deleteMultiplePosts(selectedPosts);//deleting posts by passing array of ids
     } catch (error) {
         console.log(error);
-        return postData;
     }
 }

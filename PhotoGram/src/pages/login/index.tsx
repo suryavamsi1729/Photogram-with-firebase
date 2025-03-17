@@ -14,35 +14,39 @@ import AuthLayout from "@/components/ui/authLayout";
 //importing css files
 import "./index.css";
 import Spinner from "@/components/ui/sipinner";
-
-
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/reducers";
+import { fetchUser } from "@/store/thunk";
+import useLocalStorage from "@/hooks/useLocalStorage";
 //interface to define the props types
 interface ILogInProps {
 }
-
 //for the login a user  email and password is 
 //taken from the user the with intial values email and password  are empty string 
 const initalValue : UserLogIn = {
     email:"",
     password: "",
 }
-
 const Login:React.FunctionComponent <ILogInProps> = () => {
     const {toast} = useToast();
     const navigate = useNavigate();
     const {logIn,googleSignIn,logOut,setLoading,loading} = useUseAuth();
     const [userInfo,setUserInfo] = useState<UserLogIn>(initalValue);
+    const [,setUserId] = useLocalStorage<string | null>("uid",null);
+    const dispatch:AppDispatch = useDispatch()
     const handelSubmit = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         try {
           const user = await logIn(userInfo.email, userInfo.password);
-      
           if (user.user.emailVerified) {
             navigate("/");
+            dispatch(fetchUser(user.user.uid));
+            setUserId(user.user.uid);
           } else {
             alert("Please verify your email before logging in.");
             await logOut();
+            setUserId("");
           }
         } catch (error: any) {
           // Handle specific Firebase errors

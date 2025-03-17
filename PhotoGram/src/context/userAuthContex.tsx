@@ -1,6 +1,6 @@
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState } from "react";
 import { auth } from "@/firebaseConfig";
-import { createUserWithEmailAndPassword,sendPasswordResetEmail, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, User, confirmPasswordReset, applyActionCode,} from "firebase/auth";
+import { createUserWithEmailAndPassword,sendPasswordResetEmail, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, User, confirmPasswordReset, applyActionCode,} from "firebase/auth";
 import { createContext} from "react";
 import useAuthStateChange from "@/hooks/useauthstatechange";
 
@@ -61,7 +61,6 @@ export const userAuthContext = createContext<AuthContextData>({
 });
 
 export const UserAuthProvider : React.FC<IUserAuthProvider> = ({children})=>{
-    // const [user,setUser] = useState<User | null>(null);
     const {user} = useAuthStateChange();
     const [loading,setLoading] = useState <boolean> (false);
     const value:AuthContextData = {

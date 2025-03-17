@@ -1,18 +1,22 @@
-import { useState,useRef,useCallback} from 'react';
+import { useState,useRef,useCallback, useEffect} from 'react';
 import { FileEntry } from '@/types';
 import { FileUploaderRegular, OutputCollectionState, OutputFileEntry,UploadCtxProvider } from '@uploadcare/react-uploader';
 import '@uploadcare/react-uploader/core.css';
+import { cn } from '@/lib/utils';
 
 interface IFileUploder{
     fileEntry: FileEntry,
     onChange: (fileEntry:FileEntry)=>void,
     isOpen?:boolean,
     setOpen:(isOpen:boolean)=>void,
+    className?:string
+}
+interface IProfileUploder extends IFileUploder{
 }
 
 
 
-const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,setOpen}) =>{
+const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,setOpen,className}) =>{
     const ctxProviderRef = useRef<InstanceType<UploadCtxProvider>>(null);
     const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry<'success'>[]>([]);
 
@@ -34,7 +38,7 @@ const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,setOpen}) =>{
       }
     
     return(
-        <div className='w-full h-auto flex flex-col justify-start items-start gap-4'>
+        <div className={cn(`w-full h-auto flex flex-col justify-start items-start gap-4`,className)}>
             <FileUploaderRegular
                 imgOnly={true}
                 multiple={true}
@@ -73,6 +77,41 @@ const FileUploder:React.FC<IFileUploder> = ({fileEntry,onChange,setOpen}) =>{
                 </div>
             </div>
         </div>
+    );
+}
+export const ProfileUploder:React.FC<IProfileUploder> = ({fileEntry,onChange,className}) =>{
+    const ctxProviderRef = useRef<InstanceType<UploadCtxProvider>>(null);
+    useEffect(()=>{
+        console.log(ctxProviderRef.current);
+    },[]);
+    const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry<'success'>[]>([]);
+
+    const resetUploaderState = () => ctxProviderRef.current?.uploadCollection.clearAll();
+    const handleModalCloseEvent = () => {
+        resetUploaderState();
+    
+        onChange({ files: [...fileEntry.files, ...uploadedFiles] })
+    
+        setUploadedFiles([]);
+      };
+      const handleChangeEvent = (files:OutputCollectionState) => {
+        setUploadedFiles([...files.allEntries.filter(f => f.status === 'success')] as OutputFileEntry<'success'>[]);
+      }
+    
+    return(
+            <FileUploaderRegular
+                className={cn(`profileuploder`,className)}
+                imgOnly={true}
+                multiple={false}
+                removeCopyright={true}
+                confirmUpload={false}
+                apiRef={ctxProviderRef}
+                sourceList="local, url, camera, gdrive, gphotos"
+                classNameUploader="uc-dark"
+                pubkey="2bd2b6e865d9925f590b"
+                onModalClose={handleModalCloseEvent}
+                onChange={handleChangeEvent}
+            />
     );
 }
 

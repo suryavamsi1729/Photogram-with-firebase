@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { IBasicFCProps, PostResponse } from "@/types";
-import { useUseAuth } from "@/context/userAuthContex";
 import Layout from "@/components/layout/layout";
 import GalleryNavBar from "@/components/navbar/galleryNavBar";
 import { Outlet } from "react-router-dom";
-import { getAllPostData, handelMultipleDelets } from "./utile";
+import { handelMultipleDelets } from "./utile";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/store/reducers";
+import { fetchPosts } from "@/store/thunk/postsActions";
+import { selectPostSelectedPosts } from "@/store/selectors";
+import { deletePostsFromStore } from "@/store/actions";
 
 interface IGallery extends IBasicFCProps{
 
@@ -14,37 +19,23 @@ interface IGallery extends IBasicFCProps{
 //change the outlet data passing by craeting the contexapi/redux
 
 const Gallery : React.FC<IGallery> = ()=>{
-    const {user} = useUseAuth();
-    const [postData,setPostData] = useState<PostResponse[]>([]);
-    const [selectedPosts,setSelectedPosts] = useState<PostResponse[]> ([]);
-
+    const [userId,] = useLocalStorage("uid",null);
+    const dispatch = useDispatch<AppDispatch>();
+    const selectedPosts = useSelector(selectPostSelectedPosts)
     const MultipleDelete = async ()=>{
         try {
-            const data = await handelMultipleDelets(selectedPosts,postData);
-            setPostData(data);
-            setSelectedPosts([]);
-        } 
+            await handelMultipleDelets(selectedPosts);
+            dispatch(deletePostsFromStore([...selectedPosts]));
+        }
         catch (error) {
             console.log(error);
         }
     }
-
     useEffect(() => {
-        const asyncGetPosts = async (id: string) => {
-            try {
-                const data = await getAllPostData(id); // Fetch posts
-                setPostData(data); // Update state with fetched data
-                
-            } 
-            catch (error) {
-                console.error("Failed to fetch posts:", error);
-            }
-        };
-    
-        if (user?.uid) {
-            asyncGetPosts(user.uid); // Call the async function with user ID
+        if(userId){
+            dispatch(fetchPosts(userId));
         }
-    }, [user?.uid]); // Re-run effect when `user?.uid` changes
+    }, [userId]); // Re-run effect when `user?.uid` changes
     return(
         <>
             <Layout>
@@ -54,12 +45,7 @@ const Gallery : React.FC<IGallery> = ()=>{
                             <GalleryNavBar MultipleDelete={MultipleDelete}/>
                         </div>
                     </div>
-                    <Outlet context={{
-                        postData:postData,
-                        setPostData:setPostData,
-                        selectedPosts:selectedPosts,
-                        setSelectedPosts:setSelectedPosts,
-                        }} />
+                    <Outlet />
                 </div>
             </Layout>
         </>

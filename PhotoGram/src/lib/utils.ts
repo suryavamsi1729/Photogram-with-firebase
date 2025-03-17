@@ -16,7 +16,6 @@ export function navgationCheck(path:string,itemPath:string):boolean{
 export function navgationCheckSubRoute(path:string,itemPath:string):boolean{
   const pathElement = path.replace(/^\/+|\/+$/g, "");
   const itemPathElement = itemPath.replace(/^\/+|\/+$/g, "");
-  console.log(pathElement,itemPathElement);
   if(pathElement === itemPathElement){
     return true;
   }

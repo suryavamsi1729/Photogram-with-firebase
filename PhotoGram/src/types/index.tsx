@@ -6,6 +6,17 @@ export interface UserSignIn{
     errorPassword:string,
     confimePassword:string,
 }
+export interface ProfileSetup{
+    userId:string,
+    name:string,
+    about:string,
+    imgurl: string,
+    dob:string,
+    following:string[],
+    gender:string,
+    status:string,
+
+}
 
 export interface UserLogIn{
     email:string,
@@ -61,4 +72,17 @@ export interface OutletPost{
     setPostData: (postData:PostResponse[])=>void,
     selectedPosts:PostResponse[],
     setSelectedPosts:(selectedPosts:PostResponse[])=>void,
+    loading:boolean
+}
+export interface User{
+    userId:string,
+    emailverified:boolean,
+    email:string | null,
+    password:string ,
+}
+export interface Follower{
+    id:string,
+    name: string,
+    imgUrl : string,
+    status: string
 }

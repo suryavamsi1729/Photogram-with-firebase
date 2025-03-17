@@ -2,29 +2,46 @@ import { Card,CardContent,CardFooter,CardHeader,CardTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/ui/sipinner";
 import { useLocation,useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useUseAuth } from "@/context/userAuthContex";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { emailverified  } from "@/repository/user.service";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store/reducers";
+import { fetchUser } from "@/store/thunk";
 interface IVerifyEmail{
 
 }
-
 const VerifyEmail:React.FC<IVerifyEmail> = ()=>{
     const {toast} = useToast();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const Url = new URL(searchParams.get("continueUrl") || "");
+    const urlParams = new URLSearchParams(Url.search);
+    const [uid,setUid] = useLocalStorage<string>("uid", "");
+    const uidval = urlParams.get("uid");
     const [emailVerified,setEVerified] = useState<boolean>(false);
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const oobCode = params.get("oobCode");
+    const dispatch:AppDispatch = useDispatch()
     const {verifyEmail,loading,setLoading} = useUseAuth();
+    useEffect(()=>{
+      setUid(uidval || "");
+    })
     const verifyEmailFun = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setEVerified(false);
         setLoading(true);
-      
         if (oobCode) {
           try {
             await verifyEmail(oobCode);
+            if(uid){
+              await emailverified (uid);
+              dispatch(fetchUser(uid));
+            }
             setEVerified(true);
             toast({
               title: "Email verified successfully!",
@@ -83,6 +100,7 @@ const VerifyEmail:React.FC<IVerifyEmail> = ()=>{
       
             // Log the error for debugging purposes
             console.log(error);
+            
           }
         } else {
           toast({
@@ -91,7 +109,6 @@ const VerifyEmail:React.FC<IVerifyEmail> = ()=>{
             description: "The verification code (oobCode) is missing. Please check the verification link.",
           });
         }
-      
         setLoading(false);
     };
       
@@ -122,7 +139,7 @@ const VerifyEmail:React.FC<IVerifyEmail> = ()=>{
                         <CardFooter className="flex flex-col">
                             {
                                 emailVerified
-                                ?<Button className="w-full bg-green-500/90 hover:bg-green-500/85 border-0 text-base font-medium text-slate-50" onClick={()=>{navigate("/login")}}>Continue</Button>
+                                ?<Button className="w-full bg-green-500/90 hover:bg-green-500/85 border-0 text-base font-medium text-slate-50" onClick={()=>{navigate("/profile-setup")}}>Continue</Button>
                                 :
                                 <button onClick={verifyEmailFun} className="w-full h-10 px-4 py-2 bg-slate-50 rounded-md hover:bg-slate-50/90 border-0 text-zinc-950 font-medium flex justify-center items-center gap-2" type="submit">
                                 {

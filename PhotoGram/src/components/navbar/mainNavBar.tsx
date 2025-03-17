@@ -1,6 +1,7 @@
 import { NavBar,NavBarItem,NavBarItemsConatiner,BandLogo,UserComp } from "../ui/navigation";
 import { useLocation,useNavigate } from "react-router-dom";
 import { navgationCheck } from "@/lib/utils";
+import AppLogo from "/AppLogo.png"
 
 interface IMainnavBar{
 
@@ -35,9 +36,12 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
 
     return(
         <>
-            <NavBar className="fixed top-0 px-6 py-2 z-50 bg-zinc-950">
-                <BandLogo className="relative h-12 leading-[48px] flex flex-col justify-center items-center text-[32px] gap-2 ">
-                    <span className="absoulte top-1/2 inline-block leading-normal align-middle pl-6 py-0 text-slate-50 font-medium">LOGO</span>
+            <NavBar className="fixed top-0 px-6 py-2 z-50 bg-zinc-900/70">
+                <BandLogo className="relative h-12 leading-[48px] flex flex-row justify-center items-center text-[32px] gap-2 ">
+                    <div className="w-11 h-11 p-[6px] rounded-full bg-zinc-700/40">
+                        <img src={AppLogo} className="w-full h-full object-cover object-center" alt="AppLogo"/>
+                    </div>
+                    <span className="absoulte top-1/2 inline-block leading-normal align-middle p-[2px] py-0 text-slate-50 font-medium text-2xl">PhotoGram</span>
                 </BandLogo>
                 <NavBarItemsConatiner>
                     {
@@ -52,7 +56,7 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
                         })
                     }
                 </NavBarItemsConatiner>
-                <UserComp className="justify-end gap-3"/>
+                <UserComp className="justify-end gap-2"/>
             </NavBar>
         </>
     );
