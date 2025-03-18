@@ -4,7 +4,7 @@ import MainTopNavBar from "../navbar/mainNavBar";
 import { useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
-import { fetchPostsProfiles, fetchUser } from "@/store/thunk";
+import { fetchUser } from "@/store/thunk";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 
