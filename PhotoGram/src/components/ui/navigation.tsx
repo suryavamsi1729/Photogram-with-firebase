@@ -109,7 +109,7 @@ const UserComp:React.FC<IUserComp> = ({className})=>{
                 setStateDropDown(!stateDropDown);}} 
                 src={userInfo.imgurl}
                 alt={userInfo.name}
-                className="w-10 h-10 rounded-full hover:cursor-pointer border-2 border-zinc-600/60"/>
+                className="w-9 h-9 rounded-full hover:cursor-pointer border-2 border-zinc-600/60"/>
                 
             <p className="w-24 h-full flex flex-col justify-start items-center text-lg font-normal text-pink-500 truncate">{userInfo.name}</p>
             {
