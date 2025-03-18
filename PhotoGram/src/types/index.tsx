@@ -44,7 +44,7 @@ export interface Post{
     likes:number,
     photos: PhotoMeta[],
     userLikes: [],
-    userId: String|null,
+    userId: string|null,
     date:string, 
 }
 
@@ -63,7 +63,7 @@ export interface PostResponse{
     likes:number,
     photos: PhotoMeta[],
     userLikes: [],
-    userId: String|null,
+    userId: string|null,
     date:string,
 }
 
@@ -85,4 +85,13 @@ export interface Follower{
     name: string,
     imgUrl : string,
     status: string
+}
+export interface Profile {
+    imgurl: string;
+    adout: string; // Assuming "adout" is intentional; otherwise, use "about".
+    name: string;
+  }
+  
+export interface IPostProfiles extends PostResponse{
+    profile: Profile | null;
 }

@@ -21,7 +21,7 @@ const PhotoGalleryList : React.FC<IPhotoGalleryList> = ({className})=>{
     return(
         <div className={cn("w-full h-full px-6",className)}>
             <PhotoGalleryConatiner className={`w-full h-auto grid grid-cols-1 gap-4`}>
-                <div className="w-full h-auto flex flex-col justify-start items-center divide-y-[2px] divide-zinc-800/80">
+                <div className="w-full h-auto relative flex flex-col justify-start items-center divide-y-[2px] divide-zinc-800/80">
                     <div className="w-full h-auto grid grid-cols-12 justify-start items-center gap-4 py-3">
                         <div id={"header-photos"} className="col-span-4 h-auto p-1 font-mono font-medium text-base text-white/40">Photos</div>
                         <div id={"header-caption"} className="col-span-3 h-auto px-4 py-1 font-mono font-medium text-base text-white/40">Caption</div>

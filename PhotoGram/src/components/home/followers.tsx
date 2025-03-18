@@ -90,10 +90,10 @@ const FriendsContainer : React.FC<IFollowersContaineer> = ()=>{
             <h1 className="w-full h-auto text-start text-white text-2xl font-medium">Friends</h1>
             <div className="w-full h-auto flex flex-col justify-start items-center gap-3 pb-3 ">
                 {loading || user.loading?
-                    [1,2].map(()=>{
+                    [1,2].map((itm)=>{
                         return(
-                            <>
-                            <div className="w-full h-auto flex flex-row justify-start items-center gap-4 px-3 py-2 rounded-xl bg-zinc-800/40">
+                        
+                            <div key={itm} className="w-full h-auto flex flex-row justify-start items-center gap-4 px-3 py-2 rounded-xl bg-zinc-800/40">
                                 <div className="skeleton-loading-img w-[54px] h-[54px] rounded-full bg-zinc-800/60"></div>
                                 <div className="grow h-full flex flex-col justify-center items-center gap-3">
                                     <div className="w-full h-auto flex flex-row justify-between items-center">
@@ -104,7 +104,6 @@ const FriendsContainer : React.FC<IFollowersContaineer> = ()=>{
                                     </div>
                                 </div>
                             </div>
-                            </>
                         );
                     })
                 :
@@ -149,10 +148,9 @@ const SuggestionsContainer : React.FC<ISuggestionsContainer> = ()=>{
             <h1 className="w-full h-auto text-start text-white text-2xl font-medium">Suggestions</h1>
             <div className="w-full h-auto flex flex-col justify-start items-center gap-3 pb-3 ">
                 {loading || user.loading?
-                [1,2].map(()=>{
+                [1,2].map((itm)=>{
                     return(
-                        <>
-                        <div className="w-full h-auto flex flex-row justify-start items-center gap-4 px-3 py-2 rounded-xl bg-zinc-800/40">
+                        <div key={itm} className="w-full h-auto flex flex-row justify-start items-center gap-4 px-3 py-2 rounded-xl bg-zinc-800/40">
                             <div className="skeleton-loading-img w-[54px] h-[54px] rounded-full bg-zinc-800/60"></div>
                             <div className="grow h-full flex flex-col justify-center items-center gap-3">
                                 <div className="w-full h-auto flex flex-row justify-between items-center">
@@ -163,7 +161,7 @@ const SuggestionsContainer : React.FC<ISuggestionsContainer> = ()=>{
                                 </div>
                             </div>
                         </div>
-                        </>
+                    
                     );
                 })
                 :

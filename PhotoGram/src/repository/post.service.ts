@@ -1,6 +1,6 @@
 import { db } from "@/firebaseConfig";
 import { Post } from "@/types";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, where, writeBatch } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, orderBy, query, startAfter, where, writeBatch } from "firebase/firestore";
 
 //collection Name
 const COLLECTION_NAME = "posts";
@@ -15,10 +15,19 @@ export const createPost = (post:Post)=>{
 
 //get all the post in db
 export const getAllPosts = ()=>{
-    const q = query(postsRef,orderBy("date"));
+    const q = query(postsRef,orderBy("date" , "desc"));
     return getDocs(q);
 }
-
+//get fist N post  in db
+export const getFistNPosts = (N:number)=>{
+    const q = query(postsRef,orderBy("date" , "desc"),limit(N));
+    return getDocs(q);
+}
+//get next N post in db
+export const getNextNPosts = (N:number,date:string,lastid:string,)=>{
+    const q = query(postsRef,orderBy("date" , "desc"),orderBy("__name__","desc"),limit(N),startAfter(date, lastid),);
+    return getDocs(q);
+}
 //get post by userid
 export const getPostByUserId = (id:string)=>{
     const q = query(postsRef,where("userId", "==", id));

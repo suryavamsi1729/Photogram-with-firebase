@@ -40,7 +40,7 @@ const Gallery : React.FC<IGallery> = ()=>{
         <>
             <Layout>
                 <div className="w-full h-full flex flex-col justify-start items-center">
-                    <div id="header" className="w-full h-auto flex flex-row justify-start items-center gap-4">
+                    <div id="header" className="z-[100] w-full h-auto sticky top-16 flex flex-row justify-start items-center gap-4">
                         <div id="galleryNavList" className="grow h-auto flex flex-row justify-start items-center border-b-[2px] border-zinc-800/80">
                             <GalleryNavBar MultipleDelete={MultipleDelete}/>
                         </div>
