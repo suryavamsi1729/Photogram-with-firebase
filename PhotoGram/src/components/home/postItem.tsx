@@ -17,9 +17,9 @@ const PostItem: React.FC<IPostItem> = ({post})=>{
                 
             </div>
             <div className="w-[440px] h-[480px] border border-zinc-700/40 rounded-xl bg-zinc-500">
-                <img alt={post.photos[0].uuid || "image"} src={post.photos[0].cdnUrl || ""} className="w-[440px] h-[480px] object-cover rounded-xl border border-zinc-700/40"/>
+                <img alt={post.photos[0]?.uuid || "image"} src={post.photos[0]?.cdnUrl || ""} className="w-[440px] h-[480px] object-cover rounded-xl border border-zinc-700/40"/>
             </div>
-            <p className="w-full h-auto px-2 truncate text-base/[16px] font-normal text-zinc-400">{post.caption}</p>
+            <p className="w-full h-auto px-2 truncate text-base/[16px] font-normal text-zinc-400">{post?.caption}</p>
             <div className="w-full h-auto flex flex-row justify-start items-center gap-6 px-2 py-2 ">
                 <Heart className="h-5 text-white"/>
                 <MessageCircle className="h-5 text-white"/>
