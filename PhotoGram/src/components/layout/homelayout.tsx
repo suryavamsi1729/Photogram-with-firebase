@@ -3,7 +3,7 @@ import { IBasicFCProps } from "@/types";
 import {cn} from "../../lib/utils"
 import FriendsSuggestionContainer from "../home/friendsSuggestionConatiner";
 import PostItem, { PostItemSekleton } from "../home/postItem";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
 import { selectPostsWithProfilesState } from "@/store/selectors";
@@ -18,6 +18,7 @@ interface IHomeLayout extends IBasicFCProps{
 
 
 const HomeLayout:React.FC<IHomeLayout> = ({className}) =>{
+
     const {loading,posts,lastDoc} = useSelector(selectPostsWithProfilesState);
     const [userId,] = useLocalStorage<string | null>("uid",null);
     const dispatch:AppDispatch = useDispatch();
