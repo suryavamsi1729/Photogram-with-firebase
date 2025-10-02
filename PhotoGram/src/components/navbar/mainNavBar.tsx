@@ -28,10 +28,10 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
             name:"Post",
             link:"/post"
         },
-        {
-            name:"Message",
-            link:"/message"
-        }
+        // {
+        //     name:"Message",
+        //     link:"/message"
+        // }
     ]
 
     return(
