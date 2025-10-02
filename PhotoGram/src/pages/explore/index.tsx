@@ -16,9 +16,9 @@ type PostType = "photo" | "video" | "reel" | "story";
 const Explorer: React.FC = () => {
     const [userId,] = useLocalStorage<string | null>("uid",null);
     const dispatch:AppDispatch = useDispatch();
-    const {loading,posts,lastDoc} = useSelector(selectPostsWithProfilesState);
+    const {posts,lastDoc} = useSelector(selectPostsWithProfilesState);
     const [search, setSearch] = useState("");
-    const [filter, setFilter] = useState<PostType | "all">("all");
+    const [filter, ] = useState<PostType | "all">("all");
     const containerRef = useRef<HTMLDivElement>(null);
     const handleScroll = useThrottle(() => {
         // Get current scroll position and dimensions
