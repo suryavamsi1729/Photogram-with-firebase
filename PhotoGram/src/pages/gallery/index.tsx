@@ -8,7 +8,7 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
 import { fetchPosts } from "@/store/thunk/userPostsActions";
-import { selectPostPosts, selectPostSelectedPosts, selectPostsState } from "@/store/selectors";
+import { selectPostPosts, selectPostsState } from "@/store/selectors";
 import { deletePostsFromStore } from "@/store/actions";
 
 interface IGallery extends IBasicFCProps{
