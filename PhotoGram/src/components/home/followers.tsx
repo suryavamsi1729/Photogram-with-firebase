@@ -44,7 +44,7 @@ const FollowerItem : React.FC<IFollowers> = ({className,follower,suggestion,setS
     }
     return(
         <div id={`${follower.userId}`} {...props} className={cn("group w-full h-auto flex flex-row justify-start items-center gap-4 px-3 py-2 rounded-xl bg-zinc-800/40 hover:bg-zinc-800 hover:cursor-pointer",className)}>
-            <img id={`${follower.userId}-photo`} src={follower.imgurl} className="w-[54px] h-[54px] rounded-full object-contain border-2 border-zinc-700 p-[2px]"/>
+            <img alt="image" id={`${follower.userId}-photo`} src={follower.imgurl} className="w-[54px] h-[54px] rounded-full object-contain border-2 border-zinc-700 p-[2px]"/>
             <div className="grow h-full flex flex-col justify-center items-center gap-2">
                 <div className="w-full h-auto flex flex-row justify-between items-center">
                     <p className="w-full h-auto truncate text-start text-sm/[16px] font-mono font-medium text-zinc-50/80 group-hover:text-white">{follower.name}</p>
@@ -83,7 +83,7 @@ const FriendsContainer : React.FC<IFollowersContaineer> = ()=>{
             }
        }
        fetchUserFriends();
-    },[user]);
+    },[userId,user]);
 
     return(
         <div className={`w-full h-auto  gap-4 ${friends.length>0 || user.loading?"flex":"hidden"} flex-col justify-start items-center `}>
@@ -142,7 +142,7 @@ const SuggestionsContainer : React.FC<ISuggestionsContainer> = ()=>{
             }
        }
        fetchUserSuggetions();
-    },[user]);
+    },[userId,user]);
     return(
         <div className={`w-full f-auto ${suggestions.length>0 || user.loading?"flex":"hidden"} flex-col justify-start items-center gap-4`}>
             <h1 className="w-full h-auto text-start text-white text-2xl font-medium">Suggestions</h1>

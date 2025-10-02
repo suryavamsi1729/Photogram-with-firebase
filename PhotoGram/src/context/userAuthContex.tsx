@@ -39,7 +39,7 @@ const googleSignIn = () =>{
     return signInWithPopup(auth,googleAuthProvider);
 }
  const linkToResetPassword = (email:string)=>{
-    return sendPasswordResetEmail(auth,email,{url:"http://localhost:3000/reset-password",handleCodeInApp:true});
+    return sendPasswordResetEmail(auth,email,{url:"https://photogram-with-firebase.vercel.app/reset-password",handleCodeInApp:true});
  }
 const resetPassword = (oobcode:string,newpwd:string)=>{
     return confirmPasswordReset(auth,oobcode,newpwd);

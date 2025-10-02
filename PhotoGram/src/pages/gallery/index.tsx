@@ -8,7 +8,7 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
 import { fetchPosts } from "@/store/thunk/userPostsActions";
-import { selectPostSelectedPosts } from "@/store/selectors";
+import { selectPostPosts, selectPostSelectedPosts } from "@/store/selectors";
 import { deletePostsFromStore } from "@/store/actions";
 
 interface IGallery extends IBasicFCProps{
@@ -21,7 +21,7 @@ interface IGallery extends IBasicFCProps{
 const Gallery : React.FC<IGallery> = ()=>{
     const [userId,] = useLocalStorage("uid",null);
     const dispatch = useDispatch<AppDispatch>();
-    const selectedPosts = useSelector(selectPostSelectedPosts)
+    const userPosts = useSelector(selectPostPosts)
     const MultipleDelete = async ()=>{
         try {
             await handelMultipleDelets(selectedPosts);
@@ -32,10 +32,13 @@ const Gallery : React.FC<IGallery> = ()=>{
         }
     }
     useEffect(() => {
-        if(userId){
+        console.log(userPosts);
+        if(userId && userPosts.length==0){
             dispatch(fetchPosts(userId));
         }
-    }, [userId]); // Re-run effect when `user?.uid` changes
+        console.log(userPosts); 
+    }, [userId,userPosts]);
+    console.log(userPosts);
     return(
         <>
             <Layout>

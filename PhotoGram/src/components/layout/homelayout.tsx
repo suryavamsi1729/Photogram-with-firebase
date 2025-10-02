@@ -3,7 +3,7 @@ import { IBasicFCProps } from "@/types";
 import {cn} from "../../lib/utils"
 import FriendsSuggestionContainer from "../home/friendsSuggestionConatiner";
 import PostItem, { PostItemSekleton } from "../home/postItem";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/reducers";
 import { selectPostsWithProfilesState } from "@/store/selectors";
@@ -29,16 +29,15 @@ const HomeLayout:React.FC<IHomeLayout> = ({className}) =>{
         const scrollHeight = document.documentElement.scrollHeight;
         const clientHeight = window.innerHeight;
         const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
-        if (scrollPercent >= 95) {
-            console.log("hii");
+        if (scrollPercent >= 90) {
             dispatch(fetchNextPostsProfiles(4,posts[posts.length-1].date,lastDoc));
         }
-      }, 800);
+      }, 300);
     useEffect(()=>{
         if(userId){
             dispatch(fetchPostsProfiles(4));
         }
-        },[]);
+        },[userId]);
     useEffect(()=>{
         window.addEventListener('scroll', handleScroll);
         // Cleanup on unmount

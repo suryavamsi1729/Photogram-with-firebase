@@ -3,6 +3,7 @@ import Error from "./pages/error";
 import Login from "./pages/login";
 import PasswordReset from "./pages/login/forgotPassword";
 import Verification from "./pages/verification/inde";
+import Explorer from "./pages/explore";
 import Signup from "./pages/signup";
 import Home from "./pages/home";
 import Post from "./pages/post";
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
                     }
 
                 ]
+            },
+            {
+                path: "/explore",
+                element:<Explorer/>,
+                errorElement:<Error/>,
             },
             {
                 path: "/gallery",

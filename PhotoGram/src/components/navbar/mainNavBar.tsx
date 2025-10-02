@@ -18,7 +18,7 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
         },
         {
             name:"Explore",
-            link:"/expore"
+            link:"/explore"
         },
         {
             name:"Gallary",
@@ -47,8 +47,8 @@ const MainTopNavBar : React.FC<IMainnavBar> = ()=>{
                     {
                         navgationLinks.map((item,i)=>{
                             return (
-                                <NavBarItem onClick={()=>{navigate(item.link)}}  data={item.name} key={i} className={`${navgationCheck(location.pathname,item.link)?"pointer-events-none text-pink-500 opacity-100":"pointer-events-auto text-slate-50"} group h-6  font-normal relative overflow-hidden hover:cursor-pointer  navitem`}>
-                                    <span className={`${navgationCheck(location.pathname,item.link)?"opacity-100":"opacity-40"} inline-block text-base translate-y-0 group-hover:-translate-y-6 group-hover:transition group-hover:duration-300 group-hover:ease-in-out`}>
+                                <NavBarItem onClick={()=>{navigate(item.link)}}  data={item.name} key={i} className={`${navgationCheck(location.pathname,item.link)?"pointer-events-none text-pink-500 opacity-100":"pointer-events-auto text-slate-50"} group h-6  font-normal relative overflow-hidden hover:cursor-pointer  `}>
+                                    <span className={`${navgationCheck(location.pathname,item.link)?"opacity-100":"opacity-40"} inline-block text-base `}>
                                         {item.name}
                                     </span>
                                 </NavBarItem>
