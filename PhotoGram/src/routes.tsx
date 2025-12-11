@@ -15,7 +15,7 @@ import { PhotoGallery } from "./pages/gallery/photogaller";
 import { PhotoGalleryList } from "./pages/gallery/photogallerylist";
 import AuthProfile from "./pages/profile/authprofile";
 
-
+// router configuration
 export const router = createBrowserRouter([
     {
         path:"/login",
